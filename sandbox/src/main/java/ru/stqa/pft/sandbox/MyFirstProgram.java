@@ -4,18 +4,16 @@ public class MyFirstProgram {
 
   public static void main(String[] args) {
 
-    hello("World");
     hello("user");
-    hello("Olga");
 
+    Square s = new Square(5);
+    System.out.println("Площадь квадрата со стороной " + s.l + " = " + s.area());
 
-    double l = 8;
-    System.out.println("Площадь квадрата со стороной " + l + " = " + area(l));
+    Rectangle r = new Rectangle(3,7);
+    System.out.println("Площадь прямоугольника со сторонами " + r.a + " и "+ r.b +" = " + r.area());
 
-    double a = 3;
-    double b = 7;
-    System.out.println("Площадь прямоугольника со сторонами " + a + " и "+ b +" = " + area(a,b));
   }
+
 
   public static void hello ( String somebody){
     //String somebody = "World";
@@ -23,13 +21,4 @@ public class MyFirstProgram {
 
   }
 
-  public static double area(double len){
-    return len*len;
-
-  }
-
-  public static double area (double a, double b){
-    return a*b;
-
-  }
 }
