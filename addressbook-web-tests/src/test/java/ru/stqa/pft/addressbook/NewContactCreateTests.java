@@ -49,11 +49,18 @@ import java.util.concurrent.TimeUnit;
     public void testNewContact() {
 
       initNewContactCreation();
-
       fillNewContact(new NewContactData("FirstName", "LastName", "Company", "Address", "home", "mobile", "work", "fax", "e-mail"));
-
       submitNewContactCreation();
       //wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+    }
+
+    @Test
+    public void testNewContact2() {
+
+      initNewContactCreation();
+      fillNewContact(new NewContactData("test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9"));
+      submitNewContactCreation();
+
     }
 
     private void fillNewContact(NewContactData newContactData) {

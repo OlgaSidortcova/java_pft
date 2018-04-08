@@ -41,9 +41,30 @@ public class GroupCreateTests {
     initGroupCreation();
     fillGroupCreation(new GroupData("test1", "test2", "test3"));
     submitGroupCreation();
-    //returnToGroupPage();
     gotoGroupPage();
   }
+
+  @Test
+  public void testGroupCreation2() {
+
+    gotoGroupPage();
+    initGroupCreation();
+    fillGroupCreation(new GroupData("text1", "text2", "text3"));
+    submitGroupCreation();
+    gotoGroupPage();
+  }
+
+  @Test
+  public void testGroupCreation3() {
+
+    gotoGroupPage();
+    initGroupCreation();
+    fillGroupCreation(new GroupData("testName", "testHeader", "testFooter"));
+    submitGroupCreation();
+    gotoGroupPage();
+  }
+
+
 
   private void submitGroupCreation() {
     wd.findElement(By.name("submit")).click();
