@@ -1,7 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import ru.stqa.pft.addressbook.model.NewContactData;
@@ -17,14 +16,7 @@ public class ApplicationManager {
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
 
-  public static boolean isAlertPresent(FirefoxDriver wd) {
-    try {
-      wd.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
+
 
   public void init() {
     wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("/home/sadsido/Tools/firefox/firefox"));
@@ -37,19 +29,9 @@ public class ApplicationManager {
 
     sessionHelper.login("admin", "secret");
   }
-/*
-  private void login(String usermane, String password) {
-    wd.findElement(By.name("user")).click();
-    wd.findElement(By.name("user")).clear();
-   wd.findElement(By.name("user")).sendKeys(usermane);
-    wd.findElement(By.id("LoginForm")).click();
-    wd.findElement(By.name("pass")).click();
-    wd.findElement(By.name("pass")).clear();
-    wd.findElement(By.name("pass")).sendKeys(password);
-    wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
-  }
-*/
+
   public void stop() {
+
     wd.quit();
   }
 
@@ -85,10 +67,12 @@ public class ApplicationManager {
   }
 
   public void initNewContactCreation() {
+
     groupHelper.ReturnToGroupPage(By.linkText("add new"));
   }
 
   public void submitNewContactCreation() {
+
     groupHelper.ReturnToGroupPage(By.name("submit"));
   }
 
