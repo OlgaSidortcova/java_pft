@@ -5,67 +5,36 @@ import ru.stqa.pft.addressbook.model.NewContactData;
 
 public class NewContactCreateTests extends TestBase{
 
-   /*
-    FirefoxDriver wd;
 
-    public static boolean isAlertPresent(FirefoxDriver wd) {
-      try {
-        wd.switchTo().alert();
-        return true;
-      } catch (NoAlertPresentException e) {
-        return false;
-      }
-    }
-
-    @BeforeMethod
-    public void setUp() throws Exception {
-
-      wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("/home/sadsido/Tools/firefox/firefox"));
-
-      wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-
-      wd.get("http://localhost/addressbook/index.php");
-      login("admin", "secret");
-    }
-*/
-   /* private void login(String usermane, String password) {
-      wd.findElement(By.name("user")).click();
-      wd.findElement(By.name("user")).clear();
-      wd.findElement(By.name("user")).sendKeys(usermane);
-      wd.findElement(By.id("LoginForm")).click();
-      wd.findElement(By.name("pass")).click();
-      wd.findElement(By.name("pass")).clear();
-      wd.findElement(By.name("pass")).sendKeys(password);
-      wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
-    }
-*/
     @Test
-    public void testNewContact() {
+    public void testNewContact1() {
 
-      app.initNewContactCreation();
-      app.fillNewContact(new NewContactData("FirstName", "LastName", "Company", "Address", "home", "mobile", "work", "fax", "e-mail"));
-      app.submitNewContactCreation();
-      //wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+      app.getContactHelper().initNewContactCreation();
+      app.getContactHelper().fillNewContact(new NewContactData("test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9"));
+      app.getContactHelper().submitNewContactCreation();
+      app.getNavigationHelper().addNextContact();
+
+      app.getContactHelper().fillNewContact(new NewContactData("test1111111", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9"));
+      app.getContactHelper().submitNewContactCreation();
+
+      app.getNavigationHelper().returnToHomePage();
+
     }
+
 
     @Test
     public void testNewContact2() {
 
-      app.initNewContactCreation();
-      app.fillNewContact(new NewContactData("test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9"));
-      app.submitNewContactCreation();
+      app.getContactHelper().initNewContactCreation();
+      app.getContactHelper().fillNewContact(new NewContactData("FirstName", "LastName", "Company", "Address", "home", "mobile", "work", "fax", "e-mail"));
+
+      app.getContactHelper().submitNewContactCreation();
+      app.getNavigationHelper().returnToHomePage();
 
     }
 
 
-
-    /*
-    @AfterMethod
-    public void tearDown() {
-      wd.quit();
-    }
-
-    */
+   
   }
 
 

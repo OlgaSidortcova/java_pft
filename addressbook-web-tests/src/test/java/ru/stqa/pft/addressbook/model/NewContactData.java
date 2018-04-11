@@ -52,6 +52,7 @@ public class NewContactData {
   }
 
   public String getFax() {
+
     return fax;
   }
 

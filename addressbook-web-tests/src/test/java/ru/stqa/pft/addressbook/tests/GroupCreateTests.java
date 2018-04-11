@@ -11,9 +11,11 @@ public class GroupCreateTests extends TestBase {
     app.getNavigationHelper().gotoGroupPage();
     app.getGroupHelper().initGroupCreation();
     app.getGroupHelper().fillGroupCreation(new GroupData("test1", "test2", "test3"));
+
     app.getGroupHelper().submitGroupCreation();
-    app.getNavigationHelper().gotoGroupPage();
+    app.getGroupHelper().returnToGroupPage();
   }
+
 
   @Test
   public void testGroupCreation2() {
@@ -24,7 +26,7 @@ public class GroupCreateTests extends TestBase {
     app.getGroupHelper().submitGroupCreation();
     app.getNavigationHelper().gotoGroupPage();
   }
-
+/*
   @Test
   public void testGroupCreation3() {
 
@@ -34,6 +36,6 @@ public class GroupCreateTests extends TestBase {
     app.getGroupHelper().submitGroupCreation();
     app.getNavigationHelper().gotoGroupPage();
   }
-
+*/
 
 }
