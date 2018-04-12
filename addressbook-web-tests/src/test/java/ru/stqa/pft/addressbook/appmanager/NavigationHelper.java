@@ -22,10 +22,11 @@ public class NavigationHelper extends HelperBase{
 
   public void addNextContact() {
 
-
      click(By.linkText("add next"));
 
-    //click(By.xpath("//div[@id='content']/form/input[21]"));
+  }
 
+  public void gotoHomePage() {
+    click(By.linkText("home"));
   }
 }

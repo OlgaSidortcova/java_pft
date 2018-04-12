@@ -17,11 +17,29 @@ public class HelperBase {
     wd.findElement(locator).click();
   }
 
+  protected void swich() {
+
+    wd.switchTo().alert().accept();
+
+  }
+
+
+
   protected void type(By locator, String text) {
     click(locator);
     wd.findElement(locator).clear();
     wd.findElement(locator).sendKeys(text);
   }
+
+/*
+  protected void selectElement(By locator) {
+
+    if (!wd.findElement(locator).isSelected()) {
+      wd.findElement(locator).click();
+    }
+
+  }
+*/
 
   public boolean isAlertPresent() {
     try {
