@@ -53,10 +53,7 @@ public class NewContactData {
     return work;
   }
 
-  public String getFax() {
-
-    return fax;
-  }
+  public String getFax() {    return fax;  }
 
   public String getEmail() {
     return email;
