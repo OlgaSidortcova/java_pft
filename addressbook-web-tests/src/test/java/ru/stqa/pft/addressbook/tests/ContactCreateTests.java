@@ -10,18 +10,18 @@ public class ContactCreateTests extends TestBase{
     public void testNewContact1() {
 
       app.getContactHelper().initNewContactCreation();
-      app.getContactHelper().fillNewContact(new NewContactData("test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9"));
+      app.getContactHelper().fillNewContact(new NewContactData("test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9", "test1"), true);
       app.getContactHelper().submitNewContactCreation();
       app.getNavigationHelper().addNextContact();
 
-      app.getContactHelper().fillNewContact(new NewContactData("test1111111", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9"));
+      app.getContactHelper().fillNewContact(new NewContactData("test1111111", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9", "test1"), true);
       app.getContactHelper().submitNewContactCreation();
 
       app.getNavigationHelper().returnToHomePage();
 
     }
 
-
+/*
     @Test
     public void testNewContact2() {
 
@@ -32,7 +32,7 @@ public class ContactCreateTests extends TestBase{
       app.getNavigationHelper().returnToHomePage();
 
     }
-
+*/
 
    
   }

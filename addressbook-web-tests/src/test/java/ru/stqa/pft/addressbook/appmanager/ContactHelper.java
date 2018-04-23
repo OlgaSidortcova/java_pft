@@ -1,7 +1,10 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.NewContactData;
 
 public class ContactHelper extends HelperBase {
@@ -14,7 +17,7 @@ public class ContactHelper extends HelperBase {
   }
 
 
-  public void fillNewContact(NewContactData newContactData) {
+  public void fillNewContact(NewContactData newContactData, boolean creation) {
 
     type(By.name("firstname"), newContactData.getFirst_name());
     type(By.name("lastname"), newContactData.getLast_name());
@@ -28,6 +31,17 @@ public class ContactHelper extends HelperBase {
     type(By.name("fax"), newContactData.getFax());
     type(By.name("email"), newContactData.getEmail());
 
+
+    if (creation){
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(newContactData.getGruop());
+
+    }else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
+
+ //   if (isElementPresent(By.name("new_gruop"))) {
+ //     new Select(wd.findElement(By.name("new_gruop"))).selectByVisibleText(newContactData.getGruop());
+ //   }
   }
 
   public void initNewContactCreation() {
@@ -57,7 +71,7 @@ public class ContactHelper extends HelperBase {
 
   public void deleteSelectedContacts() {
 
-     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+    click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
 
   }
 
