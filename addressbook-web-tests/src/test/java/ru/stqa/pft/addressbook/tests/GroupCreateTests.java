@@ -1,11 +1,12 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 public class GroupCreateTests extends TestBase {
 
-  @Test
+  @Test (enabled = false)
   public void testGroupCreation() {
 
     app.getNavigationHelper().gotoGroupPage();
@@ -16,16 +17,21 @@ public class GroupCreateTests extends TestBase {
 
   @Test
   public void testGroupCreation2() {
-
     app.getNavigationHelper().gotoGroupPage();
 
+    int before = app.getGroupHelper().getGroupCount();
+
     app.getGroupHelper().createGroup(new GroupData("text1", null, null));
+
+    int after = app.getGroupHelper().getGroupCount();
+
+    Assert.assertEquals(before + 1, after);
 
   }
 
 
-/*
-  @Test
+
+  @Test (enabled = false)
   public void testGroupCreation3() {
 
     app.getNavigationHelper().gotoGroupPage();
@@ -34,6 +40,6 @@ public class GroupCreateTests extends TestBase {
     app.getGroupHelper().submitGroupCreation();
     app.getNavigationHelper().gotoGroupPage();
   }
-*/
+
 
 }
