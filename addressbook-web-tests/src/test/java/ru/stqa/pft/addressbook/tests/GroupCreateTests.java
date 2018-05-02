@@ -8,7 +8,7 @@ import java.util.List;
 
 public class GroupCreateTests extends TestBase {
 
-  @Test (enabled = false)
+  @Test(enabled = false)
   public void testGroupCreation() {
 
     app.getNavigationHelper().gotoGroupPage();
@@ -22,23 +22,14 @@ public class GroupCreateTests extends TestBase {
     app.getNavigationHelper().gotoGroupPage();
 
     List<GroupData> before = app.getGroupHelper().getGroupList();
-
-   // int before = app.getGroupHelper().getGroupCount();
-
     app.getGroupHelper().createGroup(new GroupData("text1", null, null));
-
-
     List<GroupData> after = app.getGroupHelper().getGroupList();
-
-    //int after = app.getGroupHelper().getGroupCount();
-
     Assert.assertEquals(before.size() + 1, after.size());
 
   }
 
 
-
-  @Test (enabled = false)
+  @Test(enabled = false)
   public void testGroupCreation3() {
 
     app.getNavigationHelper().gotoGroupPage();
