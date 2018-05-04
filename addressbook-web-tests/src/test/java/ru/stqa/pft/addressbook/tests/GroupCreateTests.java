@@ -38,7 +38,7 @@ public class GroupCreateTests extends TestBase {
     //int after = app.getGroupHelper().getGroupCount();
 
     Assert.assertEquals(before.size() + 1, after.size());
-
+/*
     int max = 0;
 
     for (GroupData g : after){
@@ -48,16 +48,20 @@ public class GroupCreateTests extends TestBase {
 
       }
     }
-
+*/
   //  Comparator<? super GroupData> ById = (Comparator<GroupData>) (o1, o2) -> Integer.compare(o1.getId(), o2.getId());
 
 
     //int max1 = after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId();
 
-group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
+//group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
     before.add(group);
 
-    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+    Comparator<? super GroupData> ById = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+    before.sort(ById);
+    after.sort(ById);
+
+    Assert.assertEquals(before, after);
 
   }
 
