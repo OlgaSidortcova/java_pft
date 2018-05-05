@@ -59,10 +59,7 @@ public class ContactHelper extends HelperBase {
 
   public void editContact(int index) {
 
-
-    //wd.findElements(By.name("selected[]")).get(index).click();
-   // click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
-    wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img")).get(index).click();
+    wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr/td[8]/a/img")).get(index).click();
 
   }
 
@@ -109,9 +106,9 @@ public class ContactHelper extends HelperBase {
       List<WebElement> cells = element.findElements(By.tagName("td"));
       String first_name = cells.get(2).getText();
       String last_name = cells.get(1).getText();
-      //int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+
+     // int id = Integer.parseInt(element.findElement(By.xpath(".//input[@name = selected[]']")).getAttribute("id"));
 
 
       NewContactData contact = new NewContactData(first_name, last_name, null, null, null, null, null, null, null, null, id);

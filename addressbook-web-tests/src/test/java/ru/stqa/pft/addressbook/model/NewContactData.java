@@ -31,6 +31,7 @@ public class NewContactData {
     this.id = id;
   }
 
+
   public NewContactData(String first_name, String last_name, String company, String address, String home, String mobile, String work, String fax, String email, String gruop) {
     this.first_name = first_name;
     this.last_name = last_name;
@@ -42,6 +43,7 @@ public class NewContactData {
     this.fax = fax;
     this.email = email;
     this.gruop = gruop;
+
     this.id = Integer.MAX_VALUE;
   }
 
@@ -89,21 +91,6 @@ public class NewContactData {
   public void setId(int id) {
     this.id = id;
   }
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    NewContactData that = (NewContactData) o;
-    return id == that.id &&
-            Objects.equals(first_name, that.first_name) &&
-            Objects.equals(last_name, that.last_name);
-  }
-
-  @Override
-  public int hashCode() {
-
-    return Objects.hash(first_name, last_name, id);
-  }
 
   @Override
   public String toString() {
@@ -114,5 +101,19 @@ public class NewContactData {
             '}';
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    NewContactData that = (NewContactData) o;
+    return Objects.equals(first_name, that.first_name) &&
+            Objects.equals(last_name, that.last_name);
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(first_name, last_name);
+  }
 
 }

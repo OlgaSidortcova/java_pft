@@ -33,7 +33,7 @@ public class ContactCreateTests extends TestBase {
     List<NewContactData> before = app.getContactHelper().getContactList();
 
     app.getContactHelper().initNewContactCreation();
-    NewContactData contact = new NewContactData("1", "2", "3", "4", "5", "6", "7", "8", "9", null);
+    NewContactData contact = new NewContactData("333", "2", "3", "4", "5", "6", "7", "8", "9", null);
 
     app.getContactHelper().fillNewContact(contact, true);
 
@@ -43,7 +43,7 @@ public class ContactCreateTests extends TestBase {
 
     List<NewContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(before.size() + 1, after.size());
-
+/*
     int max = 0;
     for (NewContactData cont : after) {
       if (cont.getId() > max) {
@@ -54,6 +54,20 @@ public class ContactCreateTests extends TestBase {
     contact.setId(max);
     before.add(contact);
     Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+*/
+////
+  //  contact.setId(after.stream().max((c1, c2) -> Integer.compare( c1.getId(), c2.getId())).get().getId());
+  //  before.add(contact);
+  //  Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+
+    before.add(contact);
+
+    Comparator<? super NewContactData> ById = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
+    before.sort(ById);
+    after.sort(ById);
+
+    Assert.assertEquals(before, after);
+
 
   }
 
