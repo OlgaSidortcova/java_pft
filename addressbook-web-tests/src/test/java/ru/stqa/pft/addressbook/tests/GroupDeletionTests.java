@@ -15,13 +15,13 @@ public class GroupDeletionTests extends TestBase {
   {
     app.getNavigationHelper().gotoGroupPage();
 
-    if (! app.getGroupHelper().isThereAGroup()){
+    if (!app.getGroupHelper().isThereAGroup()) {
 
       app.getGroupHelper().createGroup(new GroupData("test1", null, "test3"));
 
     }
 
-   // int before = app.getGroupHelper().getGroupCount();
+    // int before = app.getGroupHelper().getGroupCount();
     List<GroupData> before = app.getGroupHelper().getGroupList();
 
     app.getGroupHelper().secectGroup(0);
@@ -43,13 +43,11 @@ public class GroupDeletionTests extends TestBase {
     before.sort(ById);
     after.sort(ById);
 
-      Assert.assertEquals(before, after);
+    Assert.assertEquals(before, after);
 
 
- // }
+    // }
   }
-
-
 
 
 }

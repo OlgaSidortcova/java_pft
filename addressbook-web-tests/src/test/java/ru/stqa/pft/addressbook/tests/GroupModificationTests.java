@@ -11,33 +11,25 @@ import java.util.List;
 public class GroupModificationTests extends TestBase {
 
   @Test
-  public void testGroupModification(){
+  public void testGroupModification() {
     app.getNavigationHelper().gotoGroupPage();
 
-
-    if (! app.getGroupHelper().isThereAGroup()){
-
+    if (!app.getGroupHelper().isThereAGroup()) {
       app.getGroupHelper().createGroup(new GroupData("test1", "test2", "test3"));
-
     }
 
-  //  int before = app.getGroupHelper().getGroupCount();
     List<GroupData> before = app.getGroupHelper().getGroupList();
     app.getGroupHelper().secectGroup(before.size() - 1);
     app.getGroupHelper().initGruopModification();
 
-
-
-    GroupData group = new GroupData("text132", "text232", "text332", before.get(before.size()-1).getId());
+    GroupData group = new GroupData("text132", "text232", "text332", before.get(before.size() - 1).getId());
 
     app.getGroupHelper().fillGroupCreation(group);
     app.getGroupHelper().submitGruopModification();
     app.getGroupHelper().returnToGroupPage();
 
-    //int after = app.getGroupHelper().getGroupCount();
     List<GroupData> after = app.getGroupHelper().getGroupList();
     Assert.assertEquals(before.size(), after.size());
-
 
     before.remove(before.size() - 1);
     before.add(group);

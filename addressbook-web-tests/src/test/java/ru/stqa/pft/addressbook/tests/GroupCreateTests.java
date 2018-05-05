@@ -22,39 +22,14 @@ public class GroupCreateTests extends TestBase {
   @Test
   public void testGroupCreation2() {
     app.getNavigationHelper().gotoGroupPage();
-
     List<GroupData> before = app.getGroupHelper().getGroupList();
 
-   // int before = app.getGroupHelper().getGroupCount();
-
-
     GroupData group = new GroupData("text1", null, null);
-
     app.getGroupHelper().createGroup(group);
 
 
     List<GroupData> after = app.getGroupHelper().getGroupList();
-
-    //int after = app.getGroupHelper().getGroupCount();
-
     Assert.assertEquals(before.size() + 1, after.size());
-/*
-    int max = 0;
-
-    for (GroupData g : after){
-      if (g.getId()> max){
-        max = g.getId();
-
-
-      }
-    }
-*/
-  //  Comparator<? super GroupData> ById = (Comparator<GroupData>) (o1, o2) -> Integer.compare(o1.getId(), o2.getId());
-
-
-    //int max1 = after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId();
-
-//group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
     before.add(group);
 
     Comparator<? super GroupData> ById = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
