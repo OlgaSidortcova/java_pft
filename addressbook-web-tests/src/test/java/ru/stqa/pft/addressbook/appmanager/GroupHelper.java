@@ -94,8 +94,8 @@ public class GroupHelper extends HelperBase {
 
       String name = element.getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      GroupData group = new GroupData(name, null, null, id);
-      groups.add(group);
+    //  GroupData group = new GroupData().withName(name).withId(id);
+      groups.add(new GroupData().withName(name).withId(id));
     }
     return groups;
   }

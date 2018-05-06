@@ -18,22 +18,18 @@ public class GroupModificationTests extends TestBase {
     if ( app.group().list().size() == 0) {
 
           //  !app.group().isThereAGroup()) {
-      app.group().create(new GroupData("test1", "test2", "test3"));
+      app.group().create(new GroupData().withName("test1").withHeader("test2").withFooter( "test3"));
     }
   }
 
 
   @Test
   public void testGroupModification() {
-    app.goTo().groupPage();
-
-    if (!app.group().isThereAGroup()) {
-      app.group().create(new GroupData("test1", "test2", "test3"));
-    }
-    List<GroupData> before = app.group().list();
+        List<GroupData> before = app.group().list();
     int index = before.size() - 1;
-    GroupData group = new GroupData("text132", "text232", "text332", before.get(index).getId());
-
+  //  GroupData group = new GroupData("text132", "text232", "text332", before.get(index).getId());
+    GroupData group = new GroupData().
+            withName("test1").withHeader("test2").withFooter( "test3").withId(before.get(index).getId());
 
     app.group().modify(index, group);
 

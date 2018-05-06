@@ -13,7 +13,7 @@ public class GroupCreateTests extends TestBase {
   public void testGroupCreation() {
 
     app.goTo().groupPage();
-    app.group().create(new GroupData("test1", null, "test3"));
+   //???????? app.group().create(new GroupData("test1", null, "test3"));
 
   }
 
@@ -22,7 +22,8 @@ public class GroupCreateTests extends TestBase {
     app.goTo().groupPage();
     List<GroupData> before = app.group().list();
 
-    GroupData group = new GroupData("text1", null, null);
+  //  GroupData group = new GroupData("text1", null, null);
+    GroupData group = new GroupData().withName("text1");
     app.group().create(group);
 
 
@@ -42,7 +43,7 @@ public class GroupCreateTests extends TestBase {
 
     app.goTo().groupPage();
     app.group().initGroupCreation();
-    app.group().fillGroupCreation(new GroupData("testName", "testHeader", "testFooter"));
+   //???? app.group().fillGroupCreation(new GroupData("testName", "testHeader", "testFooter"));
     app.group().submitGroupCreation();
     app.goTo().groupPage();
   }
