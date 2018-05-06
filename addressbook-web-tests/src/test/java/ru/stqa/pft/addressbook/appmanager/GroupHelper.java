@@ -42,9 +42,7 @@ public class GroupHelper extends HelperBase {
   }
 
   public void secectGroup(int index) {
-
     wd.findElements(By.name("selected[]")).get(index).click();
-   // click(By.name("selected[]"));
   }
 
   public void initGruopModification() {
@@ -78,15 +76,13 @@ public class GroupHelper extends HelperBase {
     List<GroupData> groups = new ArrayList<GroupData>();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
 
-    for (WebElement element : elements){
+    for (WebElement element : elements) {
 
       String name = element.getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      GroupData group = new GroupData(name, null, null, id );
+      GroupData group = new GroupData(name, null, null, id);
       groups.add(group);
     }
-
     return groups;
-
   }
 }

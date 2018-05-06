@@ -6,7 +6,7 @@ public class GroupData {
   private final String name;
   private final String header;
   private final String footer;
-  private  int id;
+  private int id;
 
 
   public GroupData(String name, String header, String footer, int id) {
@@ -16,16 +16,12 @@ public class GroupData {
     this.id = id;
   }
 
-
-
-
   public GroupData(String name, String header, String footer) {
     this.name = name;
     this.header = header;
     this.footer = footer;
     this.id = Integer.MAX_VALUE;
   }
-
 
   public String getName() {
     return name;
@@ -35,7 +31,9 @@ public class GroupData {
     return header;
   }
 
-  public String getFooter() {  return footer;  }
+  public String getFooter() {
+    return footer;
+  }
 
   public int getId() {
     return id;
@@ -66,5 +64,4 @@ public class GroupData {
 
     return Objects.hash(name);
   }
-
 }

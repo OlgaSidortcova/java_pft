@@ -15,8 +15,6 @@ public class NewContactData {
   private String gruop;
   private int id;
 
-
-
   public NewContactData(String first_name, String last_name, String company, String address, String home, String mobile, String work, String fax, String email, String gruop, int id) {
     this.first_name = first_name;
     this.last_name = last_name;
@@ -30,7 +28,6 @@ public class NewContactData {
     this.gruop = gruop;
     this.id = id;
   }
-
 
   public NewContactData(String first_name, String last_name, String company, String address, String home, String mobile, String work, String fax, String email, String gruop) {
     this.first_name = first_name;
@@ -75,11 +72,14 @@ public class NewContactData {
     return work;
   }
 
-  public String getFax() {    return fax;  }
+  public String getFax() {
+    return fax;
+  }
 
   public String getEmail() {
     return email;
   }
+
   public String getGruop() {
     return gruop;
   }
