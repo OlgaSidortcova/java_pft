@@ -12,21 +12,21 @@ public class GroupCreateTests extends TestBase {
   @Test(enabled = false)
   public void testGroupCreation() {
 
-    app.getNavigationHelper().gotoGroupPage();
-    app.getGroupHelper().createGroup(new GroupData("test1", null, "test3"));
+    app.goTo().groupPage();
+    app.group().create(new GroupData("test1", null, "test3"));
 
   }
 
   @Test
   public void testGroupCreation2() {
-    app.getNavigationHelper().gotoGroupPage();
-    List<GroupData> before = app.getGroupHelper().getGroupList();
+    app.goTo().groupPage();
+    List<GroupData> before = app.group().list();
 
     GroupData group = new GroupData("text1", null, null);
-    app.getGroupHelper().createGroup(group);
+    app.group().create(group);
 
 
-    List<GroupData> after = app.getGroupHelper().getGroupList();
+    List<GroupData> after = app.group().list();
     Assert.assertEquals(before.size() + 1, after.size());
     before.add(group);
 
@@ -40,11 +40,11 @@ public class GroupCreateTests extends TestBase {
   @Test(enabled = false)
   public void testGroupCreation3() {
 
-    app.getNavigationHelper().gotoGroupPage();
-    app.getGroupHelper().initGroupCreation();
-    app.getGroupHelper().fillGroupCreation(new GroupData("testName", "testHeader", "testFooter"));
-    app.getGroupHelper().submitGroupCreation();
-    app.getNavigationHelper().gotoGroupPage();
+    app.goTo().groupPage();
+    app.group().initGroupCreation();
+    app.group().fillGroupCreation(new GroupData("testName", "testHeader", "testFooter"));
+    app.group().submitGroupCreation();
+    app.goTo().groupPage();
   }
 
 }

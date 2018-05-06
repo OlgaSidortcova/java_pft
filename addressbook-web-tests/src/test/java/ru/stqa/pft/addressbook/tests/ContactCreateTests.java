@@ -16,16 +16,16 @@ public class ContactCreateTests extends TestBase {
     app.getContactHelper().initNewContactCreation();
     app.getContactHelper().fillNewContact(new NewContactData("test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9", null), true);
     app.getContactHelper().submitNewContactCreation();
-    app.getNavigationHelper().addNextContact();
+    app.goTo().addNextContact();
 
     app.getContactHelper().fillNewContact(new NewContactData("test1111111", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9", "text132"), true);
     app.getContactHelper().submitNewContactCreation();
-    app.getNavigationHelper().returnToHomePage();
+    app.goTo().returnToHomePage();
   }
 
-  @Test
+  @Test(enabled = false)
   public void testNewContact2() {
-    app.getNavigationHelper().gotoHomePage();
+    app.goTo().gotoHomePage();
     List<NewContactData> before = app.getContactHelper().getContactList();
 
     app.getContactHelper().initNewContactCreation();
@@ -34,7 +34,7 @@ public class ContactCreateTests extends TestBase {
     app.getContactHelper().fillNewContact(contact, true);
 
     app.getContactHelper().submitNewContactCreation();
-    app.getNavigationHelper().returnToHomePage();
+    app.goTo().returnToHomePage();
 
 
     List<NewContactData> after = app.getContactHelper().getContactList();
