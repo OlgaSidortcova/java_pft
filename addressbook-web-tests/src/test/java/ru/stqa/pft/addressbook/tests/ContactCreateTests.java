@@ -10,34 +10,36 @@ import java.util.List;
 public class ContactCreateTests extends TestBase {
 
 
+
+
   @Test(enabled = false)
   public void testNewContact1() {
 
-    app.getContactHelper().initNewContactCreation();
-    app.getContactHelper().fillNewContact(new NewContactData("test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9", null), true);
-    app.getContactHelper().submitNewContactCreation();
+    app.contact().initNewContactCreation();
+    app.contact().fillNewContact(new NewContactData().withFirst_name("test1").withLast_name( "test2").withCompany("test3").withAddress("test4"), true);
+    app.contact().submitNewContactCreation();
     app.goTo().addNextContact();
 
-    app.getContactHelper().fillNewContact(new NewContactData("test1111111", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9", "text132"), true);
-    app.getContactHelper().submitNewContactCreation();
+    app.contact().fillNewContact(new NewContactData().withFirst_name("test123").withLast_name( "test2").withCompany("test3").withAddress("test4"), true);
+    app.contact().submitNewContactCreation();
     app.goTo().returnToHomePage();
   }
 
-  @Test(enabled = false)
+  @Test
   public void testNewContact2() {
     app.goTo().gotoHomePage();
-    List<NewContactData> before = app.getContactHelper().getContactList();
+    List<NewContactData> before = app.contact().list();
 
-    app.getContactHelper().initNewContactCreation();
-    NewContactData contact = new NewContactData("1", "2", "3", "4", "5", "6", "7", "8", "9", null);
+    app.contact().initNewContactCreation();
+    NewContactData contact = new NewContactData().withFirst_name("1").withLast_name( "2").withCompany("3").withAddress("4");
 
-    app.getContactHelper().fillNewContact(contact, true);
+    app.contact().fillNewContact(contact, true);
 
-    app.getContactHelper().submitNewContactCreation();
+    app.contact().submitNewContactCreation();
     app.goTo().returnToHomePage();
 
 
-    List<NewContactData> after = app.getContactHelper().getContactList();
+    List<NewContactData> after = app.contact().list();
     Assert.assertEquals(before.size() + 1, after.size());
 
     before.add(contact);

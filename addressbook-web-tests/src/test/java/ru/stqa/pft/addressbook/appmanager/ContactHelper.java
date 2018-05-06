@@ -97,7 +97,7 @@ public class ContactHelper extends HelperBase {
 
   }
 
-  public List<NewContactData> getContactList() {
+  public List<NewContactData> list() {
     List<NewContactData> contacts = new ArrayList<NewContactData>();
     List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
 
@@ -108,9 +108,45 @@ public class ContactHelper extends HelperBase {
       String last_name = cells.get(1).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
 
-      NewContactData contact = new NewContactData(first_name, last_name, null, null, null, null, null, null, null, null, id);
-      contacts.add(contact);
+      //NewContactData contact =
+             // new NewContactData(first_name, last_name, null, null, null, null, null, null, null, null, id);
+     // new NewContactData().withFirst_name(first_name).withLast_name( last_name).withId(id);
+
+
+      contacts.add(new NewContactData().withFirst_name(first_name).withLast_name( last_name).withId(id));
     }
     return contacts;
+  }
+
+  public void create() {
+    initNewContactCreation();
+   fillNewContact(
+            //new NewContactData("test1", "test2", "test3", "test4", "test5",
+            //        "test6", "test7", "test8", "test9", "text132"), true);
+    new NewContactData().withFirst_name("test1").withLast_name( "test2").withCompany("test3").withAddress("test4"), true);
+
+    submitNewContactCreation();
+
+  }
+
+  public void modify(int index, NewContactData contact) {
+    editContact(index);
+   fillNewContact(contact, false);
+   submitContactModification();
+    //returnToHomePage();
+  }
+ /*
+  public void returnToHomePage() {
+    if (isElementPresent(By.id("maintable"))) {
+      return;
+    }
+    click(By.linkText("home page"));
+  }
+  */
+
+  public void delete(int index) {
+    selectContact(index);
+    deleteSelectedContacts();
+    submitDeletionContact();
   }
 }

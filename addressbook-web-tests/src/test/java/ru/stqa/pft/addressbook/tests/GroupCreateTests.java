@@ -17,7 +17,7 @@ public class GroupCreateTests extends TestBase {
 
   }
 
-  @Test
+  @Test (enabled = false)
   public void testGroupCreation2() {
     app.goTo().groupPage();
     Groups before =  app.group().all();
