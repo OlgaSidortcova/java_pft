@@ -8,7 +8,9 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.NewContactData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -62,7 +64,12 @@ public class ContactHelper extends HelperBase {
     wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr/td[8]/a/img")).get(index).click();
 
   }
+  public void editContactById(int id) {
 
+   // wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr/td[8]/a/img")).get(index).click();
+     wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr/td/input[@value='" + id + "']/../../td[8]/a/img")).click();
+///
+  }
   public void submitContactModification() {
 
     click(By.name("update"));
@@ -73,6 +80,14 @@ public class ContactHelper extends HelperBase {
 
     wd.findElements(By.name("selected[]")).get(index).click();
 
+  }
+
+  public void selectContactById(int id) {
+    wd.findElement(By.cssSelector("input[value = '" + id + "' ]")).click();
+
+   // wd.findElement(By.name("selected[]")).get(index).click();
+   // wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr/td/input[@value='" + id + "']/../../td[8]/a/img")).click();
+///////////////////////////////////////////
   }
 
   public void deleteSelectedContacts() {
@@ -118,6 +133,23 @@ public class ContactHelper extends HelperBase {
     return contacts;
   }
 
+  public Set<NewContactData> all() {
+    Set<NewContactData> contacts = new HashSet<NewContactData>();//ArrayList<NewContactData>();
+    List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
+
+    for (WebElement element : elements) {
+
+      List<WebElement> cells = element.findElements(By.tagName("td"));
+      String first_name = cells.get(2).getText();
+      String last_name = cells.get(1).getText();
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+
+      contacts.add(new NewContactData().withFirst_name(first_name).withLast_name( last_name).withId(id));
+    }
+    return contacts;
+  }
+
+
   public void create() {
     initNewContactCreation();
    fillNewContact(
@@ -129,12 +161,14 @@ public class ContactHelper extends HelperBase {
 
   }
 
-  public void modify(int index, NewContactData contact) {
-    editContact(index);
+  public void modify( NewContactData contact) {
+    editContactById(contact.getId());
    fillNewContact(contact, false);
    submitContactModification();
     //returnToHomePage();
   }
+
+
  /*
   public void returnToHomePage() {
     if (isElementPresent(By.id("maintable"))) {
@@ -148,5 +182,12 @@ public class ContactHelper extends HelperBase {
     selectContact(index);
     deleteSelectedContacts();
     submitDeletionContact();
+  }
+
+  public void delete(NewContactData contact) {
+    selectContactById(contact.getId());
+    deleteSelectedContacts();
+    submitDeletionContact();
+
   }
 }
