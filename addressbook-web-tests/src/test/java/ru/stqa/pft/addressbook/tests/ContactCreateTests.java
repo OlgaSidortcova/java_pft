@@ -5,8 +5,6 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.NewContactData;
 
-import java.util.Set;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -42,12 +40,8 @@ public class ContactCreateTests extends TestBase {
     Contacts after = app.contact().all();
     Assert.assertEquals(before.size() + 1, after.size());
 
-   // contact.withId(after.stream().mapToInt(c -> c.getId()).max().getAsInt());
-
-   // before.add(contact);
-   // Assert.assertEquals(before, after);
     assertThat(after, equalTo(
-            before.withAdded( contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+            before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
 }
 

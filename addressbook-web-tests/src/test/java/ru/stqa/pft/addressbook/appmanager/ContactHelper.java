@@ -9,9 +9,7 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.NewContactData;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -59,12 +57,6 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
-  public void editContact(int index) {
-
-    wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr/td[8]/a/img")).get(index).click();
-
-  }
-
   public void editContactById(int id) {
 
     wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr/td/input[@value='" + id + "']/../../td[8]/a/img")).click();
@@ -74,12 +66,6 @@ public class ContactHelper extends HelperBase {
   public void submitContactModification() {
 
     click(By.name("update"));
-
-  }
-
-  public void selectContact(int index) {
-
-    wd.findElements(By.name("selected[]")).get(index).click();
 
   }
 
@@ -97,17 +83,6 @@ public class ContactHelper extends HelperBase {
   public void submitDeletionContact() {
 
     swich();
-  }
-
-
-  public boolean isThereAContact() {
-    return isElementPresent(By.name("selected[]"));
-
-  }
-
-  public int getContactCount() {
-    return wd.findElements(By.name("selected[]")).size();
-
   }
 
   public List<NewContactData> list() {
@@ -149,7 +124,6 @@ public class ContactHelper extends HelperBase {
             withFirst_name("test1").withLast_name("test2").withCompany("test3").withAddress("test4"), true);
 
     submitNewContactCreation();
-
   }
 
   public void modify(NewContactData contact) {
@@ -157,12 +131,6 @@ public class ContactHelper extends HelperBase {
     fillNewContact(contact, false);
     submitContactModification();
 
-  }
-
-  public void delete(int index) {
-    selectContact(index);
-    deleteSelectedContacts();
-    submitDeletionContact();
   }
 
   public void delete(NewContactData contact) {
