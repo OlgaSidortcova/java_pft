@@ -14,36 +14,7 @@ public class NewContactData {
   private String email;
   private String gruop;
   private int id = Integer.MAX_VALUE;
-/*
-  public NewContactData(String first_name, String last_name, String company, String address, String home, String mobile, String work, String fax, String email, String gruop, int id) {
-    this.first_name = first_name;
-    this.last_name = last_name;
-    this.company = company;
-    this.address = address;
-    this.home = home;
-    this.mobile = mobile;
-    this.work = work;
-    this.fax = fax;
-    this.email = email;
-    this.gruop = gruop;
-    this.id = id;
-  }
 
-  public NewContactData(String first_name, String last_name, String company, String address, String home, String mobile, String work, String fax, String email, String gruop) {
-    this.first_name = first_name;
-    this.last_name = last_name;
-    this.company = company;
-    this.address = address;
-    this.home = home;
-    this.mobile = mobile;
-    this.work = work;
-    this.fax = fax;
-    this.email = email;
-    this.gruop = gruop;
-
-    this.id = Integer.MAX_VALUE;
-  }
-*/
   public String getFirst_name() {
     return first_name;
   }

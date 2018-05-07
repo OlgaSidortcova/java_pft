@@ -43,14 +43,9 @@ public class GroupHelper extends HelperBase {
     click(By.name("delete"));
   }
 
- /* public void secectGroup(int index) {
-    wd.findElements(By.name("selected[]")).get(index).click();
-  }
-*/
   public void secectGroupById( int id) {
     wd.findElement(By.cssSelector("input[value = '" + id + "' ]")).click();
 
-   // )name("selected[]")).get(id).click();
   }
 
   public void initGruopModification() {
@@ -79,13 +74,7 @@ public class GroupHelper extends HelperBase {
     submitGruopModification();
     returnToGroupPage();
   }
-/*
-  public void delete(int index) {
-    secectGroup(index);
-    deleteSelectedGroups();
-    returnToGroupPage();
-  }
-*/
+
   public void delete(GroupData group) {
     secectGroupById(group.getId());
     deleteSelectedGroups();
@@ -102,20 +91,7 @@ public class GroupHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-/*  public List<GroupData> list() {
-    List<GroupData> groups = new ArrayList<GroupData>();
-    List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
 
-    for (WebElement element : elements) {
-
-      String name = element.getText();
-      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-    //  GroupData group = new GroupData().withName(name).withId(id);
-      groups.add(new GroupData().withName(name).withId(id));
-    }
-    return groups;
-  }
-*/
   public Groups all() {
 
    Groups groups = new Groups();

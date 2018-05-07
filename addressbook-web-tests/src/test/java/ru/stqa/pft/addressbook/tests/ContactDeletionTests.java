@@ -15,20 +15,12 @@ public class ContactDeletionTests extends TestBase {
     app.goTo().gotoHomePage();
 
     if (app.contact().list().size() == 0) {
-     /* app.contact().initNewContactCreation();
-      app.contact().fillNewContact(
-              new NewContactData("test1", "test2",
-                      "test3", "test4", "test5",
-                      "test6", "test7", "test8", "test9", "text132"), true);
-
-      app.contact().submitNewContactCreation();
-      */
       app.contact().create();
       app.goTo().returnToHomePage();
     }
   }
 
-  @Test
+  @Test// (enabled = false)
   public void testContactDelition() {
 
     Set<NewContactData> before = app.contact().all();
@@ -40,7 +32,6 @@ public class ContactDeletionTests extends TestBase {
     Set<NewContactData> after = app.contact().all();
 
     Assert.assertEquals(before.size() - 1, after.size());
-
 
     before.remove(deletedContact);
     Assert.assertEquals(before, after);

@@ -4,8 +4,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.NewContactData;
 
-import java.util.Comparator;
-import java.util.List;
 import java.util.Set;
 
 public class ContactCreateTests extends TestBase {
@@ -14,22 +12,22 @@ public class ContactCreateTests extends TestBase {
   public void testNewContact1() {
 
     app.contact().initNewContactCreation();
-    app.contact().fillNewContact(new NewContactData().withFirst_name("test1").withLast_name( "test2").withCompany("test3").withAddress("test4"), true);
+    app.contact().fillNewContact(new NewContactData().withFirst_name("test1").withLast_name("test2").withCompany("test3").withAddress("test4"), true);
     app.contact().submitNewContactCreation();
     app.goTo().addNextContact();
 
-    app.contact().fillNewContact(new NewContactData().withFirst_name("test123").withLast_name( "test2").withCompany("test3").withAddress("test4"), true);
+    app.contact().fillNewContact(new NewContactData().withFirst_name("test123").withLast_name("test2").withCompany("test3").withAddress("test4"), true);
     app.contact().submitNewContactCreation();
     app.goTo().returnToHomePage();
   }
 
-  @Test
+  @Test //(enabled = false)
   public void testNewContact2() {
     app.goTo().gotoHomePage();
     Set<NewContactData> before = app.contact().all();
 
     app.contact().initNewContactCreation();
-    NewContactData contact = new NewContactData().withFirst_name("1").withLast_name( "2").withCompany("3").withAddress("4");
+    NewContactData contact = new NewContactData().withFirst_name("1").withLast_name("2").withCompany("3").withAddress("4");
 
     app.contact().fillNewContact(contact, true);
 
@@ -42,13 +40,7 @@ public class ContactCreateTests extends TestBase {
 
     contact.withId(after.stream().mapToInt(c -> c.getId()).max().getAsInt());
 
-
     before.add(contact);
-
-    //Comparator<? super NewContactData> ById = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-    //before.sort(ById);
-    //after.sort(ById);
-
     Assert.assertEquals(before, after);
 
   }

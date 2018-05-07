@@ -8,21 +8,6 @@ public class GroupData {
   private String footer;
   private int id = Integer.MAX_VALUE;
 
- /* public GroupData(String name, String header, String footer, int id) {
-    this.name = name;
-    this.header = header;
-    this.footer = footer;
-    this.id = id;
-  }
-
-  public GroupData(String name, String header, String footer) {
-    this.name = name;
-    this.header = header;
-    this.footer = footer;
-    this.id = Integer.MAX_VALUE;
-  }
-*/
-
   public String getName() {
     return name;
   }
