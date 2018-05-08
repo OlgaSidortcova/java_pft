@@ -10,29 +10,32 @@ import static org.hamcrest.Matchers.equalTo;
 public class GroupCreateTests extends TestBase {
 
 
-  @Test (enabled = false)
+  @Test// (enabled = false)
   public void testGroupCreation2() {
     app.goTo().groupPage();
     Groups before =  app.group().all();
 
     GroupData group = new GroupData().withName("text1");
     app.group().create(group);
-
+    assertThat(app.group().count(), equalTo(before.size()+1));
     Groups after =  app.group().all();
-    assertThat(before.size() + 1, equalTo(after.size()));
 
     assertThat(after, equalTo(
             before.withAdded( group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
 
   @Test(enabled = false)
-  public void testGroupCreation3() {
+  public void testBadGroupCreation2() {
+    app.goTo().groupPage();
+    Groups before =  app.group().all();
 
-    app.goTo().groupPage();
-    app.group().initGroupCreation();
-   //???? app.group().fillGroupCreation(new GroupData("testName", "testHeader", "testFooter"));
-    app.group().submitGroupCreation();
-    app.goTo().groupPage();
+    GroupData group = new GroupData().withName("text1' ");
+    app.group().create(group);
+
+    assertThat(app.group().count(), equalTo(before.size()));
+    Groups after =  app.group().all();
+    
+
+    assertThat(after, equalTo(before));
   }
-
 }
