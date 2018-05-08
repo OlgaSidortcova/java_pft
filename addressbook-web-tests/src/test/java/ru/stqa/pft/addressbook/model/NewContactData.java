@@ -14,6 +14,7 @@ public class NewContactData {
   private String email;
   private String gruop;
   private int id = Integer.MAX_VALUE;
+  private String allphones;
 
   public String getFirst_name() {
     return first_name;
@@ -57,6 +58,10 @@ public class NewContactData {
 
   public int getId() {
     return id;
+  }
+
+  public String getAllPhones() {
+    return allphones;
   }
 
   public NewContactData withId(int id) {
@@ -112,6 +117,12 @@ public class NewContactData {
 
   public NewContactData withGruop(String gruop) {
     this.gruop = gruop;
+    return this;
+  }
+
+  public NewContactData withAllPhones(String allphones) {
+
+    this.allphones = allphones;
     return this;
   }
 

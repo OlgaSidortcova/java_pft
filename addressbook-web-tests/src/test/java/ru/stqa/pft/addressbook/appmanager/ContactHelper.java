@@ -119,13 +119,15 @@ public class ContactHelper extends HelperBase {
       List<WebElement> cells = element.findElements(By.tagName("td"));
       String firstName = cells.get(2).getText();
       String lastName = cells.get(1).getText();
-      //String allPhones = cells.get(5).getText();
-      String[] phones = cells.get(5).getText().split("\n");
+      String allPhones = cells.get(5).getText();
+     // String[] phones = cells.get(5).getText().split("\n");
 
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
 
-      contactCashe.add(new NewContactData().withFirst_name(firstName).withLast_name(lastName).
-              withId(id).withHome(phones[0]).withMobile(phones[1]).withWork(phones[2]));
+     // contactCashe.add(new NewContactData().withFirst_name(firstName).withLast_name(lastName).
+     //         withId(id).withHome(phones[0]).withMobile(phones[1]).withWork(phones[2]));
+      contactCashe.add(new NewContactData().withFirst_name(firstName).withLast_name(lastName).withId(id).withAllPhones(allPhones));
+
     }
     return new Contacts(contactCashe);
   }
