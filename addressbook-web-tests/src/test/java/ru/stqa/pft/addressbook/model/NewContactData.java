@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.model;
 
+import java.io.File;
 import java.util.Objects;
 
 public class NewContactData {
@@ -12,9 +13,13 @@ public class NewContactData {
   private String work;
   private String fax;
   private String email;
+  private String email2;
+  private String email3;
   private String gruop;
   private int id = Integer.MAX_VALUE;
   private String allphones;
+  private String allemails;
+  private File photo;
 
   public String getFirst_name() {
     return first_name;
@@ -52,6 +57,15 @@ public class NewContactData {
     return email;
   }
 
+  public String getEmail2() {
+    return email2;
+  }
+
+  public String getEmail3() {
+    return email3;
+  }
+
+
   public String getGruop() {
     return gruop;
   }
@@ -62,6 +76,14 @@ public class NewContactData {
 
   public String getAllPhones() {
     return allphones;
+  }
+
+  public String getAllEmails() {
+    return allemails;
+  }
+
+  public File getPhoto() {
+    return photo;
   }
 
   public NewContactData withId(int id) {
@@ -115,6 +137,16 @@ public class NewContactData {
     return this;
   }
 
+  public NewContactData withEmail2(String email2) {
+    this.email2 = email2;
+    return this;
+  }
+
+  public NewContactData withEmail3(String email3) {
+    this.email3 = email3;
+    return this;
+  }
+
   public NewContactData withGruop(String gruop) {
     this.gruop = gruop;
     return this;
@@ -123,6 +155,17 @@ public class NewContactData {
   public NewContactData withAllPhones(String allphones) {
 
     this.allphones = allphones;
+    return this;
+  }
+
+  public NewContactData withAllEmails(String allemails) {
+
+    this.allemails = allemails;
+    return this;
+  }
+
+  public NewContactData withPhoto(File photo) {
+    this.photo = photo;
     return this;
   }
 
@@ -150,4 +193,6 @@ public class NewContactData {
 
     return Objects.hash(first_name, last_name, id);
   }
+
+
 }

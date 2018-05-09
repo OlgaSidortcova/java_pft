@@ -14,9 +14,10 @@ public class ContactAddressTests extends TestBase {
   public void ensurePreconditions() {
     app.goTo().gotoHomePage();
 
-    if (app.contact().list().size() == 0) {
+    if (app.contact().all().size() == 0) {
       NewContactData contact = new NewContactData().withFirst_name("1").withLast_name("2").withCompany("3").
-              withAddress("Москва, Улица 1 мая, дом 5").withHome("111").withMobile("222").withWork("333").withEmail("mama@rama.ru");
+              withAddress("Москва, Улица 1 мая, дом 5").withHome("111").withWork("333").
+              withEmail2("mama@mail.ru").withEmail3("mama@yandex.ru");
       app.contact().create(contact);
       app.goTo().returnToHomePage();
     }
@@ -32,4 +33,5 @@ public class ContactAddressTests extends TestBase {
     assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
 
   }
+
 }

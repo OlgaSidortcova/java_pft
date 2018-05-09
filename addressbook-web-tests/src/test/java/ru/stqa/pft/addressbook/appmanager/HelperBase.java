@@ -5,6 +5,8 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
+import java.io.File;
+
 public class HelperBase {
 
 
@@ -35,7 +37,13 @@ public class HelperBase {
       }
     }
   }
+  protected void attach(By locator, File photo) {
 
+    if (photo != null) {
+        wd.findElement(locator).sendKeys(photo.getAbsolutePath());
+
+    }
+  }
   public boolean isAlertPresent() {
     try {
       wd.switchTo().alert();
