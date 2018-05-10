@@ -49,9 +49,11 @@ public class ContactCreateTests extends TestBase {
 
     app.goTo().groupPage();
     Groups group = app.group().all();
-    GroupData selectGroup = group.iterator().next();
-    contact = contact.withGruop(selectGroup.getName());
-
+    app.goTo().groupPage();
+    if (group.size()!=0) {
+      GroupData selectGroup = group.iterator().next();
+      contact = contact.withGruop(selectGroup.getName());
+    }
     app.contact().create(contact);
     app.goTo().returnToHomePage();
 
