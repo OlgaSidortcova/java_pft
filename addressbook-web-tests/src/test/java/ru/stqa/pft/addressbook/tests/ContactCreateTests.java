@@ -24,20 +24,23 @@ public class ContactCreateTests extends TestBase {
   @DataProvider
   public Iterator<Object[]> validContacts() throws IOException {
     String xml = "";
+try(  BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")));
+) {
 
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")));
-    String line = reader.readLine();
-    while (line != null) {
-      xml += line;
 
-      line = reader.readLine();
+  //BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")));
+  String line = reader.readLine();
+  while (line != null) {
+    xml += line;
 
-    }
-    XStream xstream = new XStream();
-    xstream.processAnnotations(NewContactData.class);
-    List<NewContactData> contacts = (List<NewContactData>) xstream.fromXML(xml);
-    return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
+    line = reader.readLine();
 
+  }
+  XStream xstream = new XStream();
+  xstream.processAnnotations(NewContactData.class);
+  List<NewContactData> contacts = (List<NewContactData>) xstream.fromXML(xml);
+  return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
+}
   }
 
 

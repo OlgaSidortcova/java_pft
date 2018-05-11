@@ -57,23 +57,28 @@ public class ContactDataGenerator {
     XStream xstream = new XStream();
     xstream.processAnnotations(NewContactData.class);
     String xml = xstream.toXML(contacts);
-    Writer writer = new FileWriter(file);
+   try( Writer writer = new FileWriter(file)){
     writer.write(xml);
-    writer.close();
+   }
+
+   // writer.close();
 
 
   }
 
   private static void saveAsCsv(List<NewContactData> contacts, File file) throws IOException {
-    Writer writer = new FileWriter(file);
+    //Writer writer = new FileWriter(file);
     System.out.println(new File(".").getAbsolutePath());
-    for (NewContactData contact : contacts) {
-      writer.write(String.format("%s; %s; %s\n", contact.getFirst_name(), contact.getLast_name(), contact.getCompany(),
-              contact.getAddress(), contact.getHome(), contact.getMobile(), contact.getWork(), contact.getFax(),
-              contact.getEmail(), contact.getEmail2(), contact.getEmail3(), contact.getPhoto()));
 
+    try( Writer writer = new FileWriter(file)) {
+      for (NewContactData contact : contacts) {
+        writer.write(String.format("%s; %s; %s\n", contact.getFirst_name(), contact.getLast_name(), contact.getCompany(),
+                contact.getAddress(), contact.getHome(), contact.getMobile(), contact.getWork(), contact.getFax(),
+                contact.getEmail(), contact.getEmail2(), contact.getEmail3(), contact.getPhoto()));
+
+      }
+      // writer.close();
     }
-    writer.close();
   }
 
   private static List<NewContactData> generateContacts(int count) {
