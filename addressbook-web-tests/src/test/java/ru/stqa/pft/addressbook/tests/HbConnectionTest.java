@@ -34,7 +34,7 @@ public class HbConnectionTest {
 
   @Test
   public void testHbConnection() {
-int a = 1;
+
     Session session = sessionFactory.openSession();
     session.beginTransaction();
   //  List<GroupData> result = session.createQuery( "from GroupData" ).list();

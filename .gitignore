@@ -1,7 +1,9 @@
 *~
 sandbox/build
 sandbox/.gradle
-.idea/workspace.xml
 sandbox/out
-addressbook-web-tests/out
+.idea/workspace.xml
 *.log
+addressbook-web-tests/out
+addressbook-web-tests/build
+addressbook-web-tests/.gradle
