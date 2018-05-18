@@ -65,16 +65,16 @@ public class GroupCreateTests extends TestBase {
     }
   }
 
-  @Test(enabled = false)//(dataProvider = "validGroupsFromXml")// (enabled = false)
+  @Test(dataProvider = "validGroupsFromXml")// (enabled = false)
   public void testGroupCreation2(GroupData group) {
     app.goTo().groupPage();
-    Groups before = app.group().all();
-
+    //Groups before = app.group().all();
+    Groups before = app.db().groups();
     app.group().create(group);
     app.goTo().groupPage();////
     assertThat(app.group().count(), equalTo(before.size() + 1));
-    Groups after = app.group().all();
-
+    //Groups after = app.group().all();
+    Groups after = app.db().groups();
     assertThat(after, equalTo(
             before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
@@ -83,13 +83,17 @@ public class GroupCreateTests extends TestBase {
   public void testGroupCreation1(GroupData group) {
 
    app.goTo().groupPage();
-    Groups before = app.group().all();
+
+    // Groups before = app.group().all();
+
+    Groups before = app.db().groups();
+
 
     app.group().create(group);
-    app.goTo().groupPage();////
+    app.goTo().groupPage();
     assertThat(app.group().count(), equalTo(before.size() + 1));
-    Groups after = app.group().all();
-
+   // Groups after = app.group().all();
+    Groups after = app.db().groups();
     assertThat(after, equalTo(
             before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
 
