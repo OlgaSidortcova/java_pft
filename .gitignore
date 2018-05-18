@@ -4,3 +4,4 @@ sandbox/.gradle
 .idea/workspace.xml
 sandbox/out
 addressbook-web-tests/out
+*.log

@@ -3,6 +3,8 @@ package ru.stqa.pft.addressbook.tests;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
@@ -21,13 +23,15 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class GroupCreateTests extends TestBase {
 
+//  Logger logger = LoggerFactory.getLogger(GroupCreateTests.class);
+
   @DataProvider
   public Iterator<Object[]> validGroupsFromXml() throws IOException {
 
     String xml = "";
     try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/group.xml")));
     ) {
-    //  BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/group.xml")));
+      //  BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/group.xml")));
       String line = reader.readLine();
       while (line != null) {
         xml += line;
@@ -61,21 +65,8 @@ public class GroupCreateTests extends TestBase {
     }
   }
 
-  @Test(dataProvider = "validGroupsFromXml")// (enabled = false)
+  @Test(enabled = false)//(dataProvider = "validGroupsFromXml")// (enabled = false)
   public void testGroupCreation2(GroupData group) {
-    app.goTo().groupPage();
-    Groups before = app.group().all();
-
-    app.group().create(group);
-    assertThat(app.group().count(), equalTo(before.size() + 1));
-    Groups after = app.group().all();
-
-    assertThat(after, equalTo(
-            before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-  }
-
-  @Test(dataProvider = "validGroupsFromJson")// (enabled = false)
-  public void testGroupCreation1(GroupData group) {
     app.goTo().groupPage();
     Groups before = app.group().all();
 
@@ -86,6 +77,23 @@ public class GroupCreateTests extends TestBase {
 
     assertThat(after, equalTo(
             before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+  }
+
+  @Test(dataProvider = "validGroupsFromJson")// (enabled = false)
+  public void testGroupCreation1(GroupData group) {
+
+   app.goTo().groupPage();
+    Groups before = app.group().all();
+
+    app.group().create(group);
+    app.goTo().groupPage();////
+    assertThat(app.group().count(), equalTo(before.size() + 1));
+    Groups after = app.group().all();
+
+    assertThat(after, equalTo(
+            before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+
+
   }
 
   @Test(enabled = false)
