@@ -2,30 +2,77 @@ package ru.stqa.pft.addressbook.model;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 import java.util.Objects;
 
+@Entity
+@Table(name = "addressbook")
 @XStreamAlias("contact")
 public class NewContactData {
+  @Column(name = "firstname")
+ // @Type(type = "text")
   private String first_name;
+
+  @Column(name = "lastname")
+ // @Type(type = "text")
   private String last_name;
+
+  @Column(name = "company")
+ // @Type(type = "varchar")
   private String company;
+
+  @Column(name = "address")
+  @Type(type = "text")
   private String address;
+
+  @Column(name = "home")
+  @Type(type = "text")
   private String home;
+
+  @Column(name = "mobile")
+  @Type(type = "text")
   private String mobile;
+
+  @Column(name = "work")
+  @Type(type = "text")
   private String work;
+
+  @Column(name = "fax")
+  @Type(type = "text")
   private String fax;
+
+  @Column(name = "email")
+  @Type(type = "text")
   private String email;
+
+  @Column(name = "email2")
+  @Type(type = "text")
   private String email2;
+
+  @Column(name = "email3")
+  @Type(type = "text")
   private String email3;
+
+  @Transient//@Column(name = "firstname")
   private String gruop;
 
+  @Id
+  @Column(name = "id")
   @XStreamOmitField
   private int id = Integer.MAX_VALUE;
+
+  @Transient
   private String allphones;
+
+  @Transient
   private String allemails;
-  private File photo;
+
+  @Column(name = "photo")
+  @Type(type = "text")
+  private String photo;
 
   public String getFirst_name() {
     return first_name;
@@ -89,7 +136,7 @@ public class NewContactData {
   }
 
   public File getPhoto() {
-    return photo;
+    return new File(photo);
   }
 
   public NewContactData withId(int id) {
@@ -170,9 +217,9 @@ public class NewContactData {
     return this;
   }
 
-  public NewContactData withPhoto(File photo){
+  public NewContactData withPhoto(File photo) {
 
-    this.photo = photo;
+    this.photo = photo.getPath();
     return this;
   }
 
