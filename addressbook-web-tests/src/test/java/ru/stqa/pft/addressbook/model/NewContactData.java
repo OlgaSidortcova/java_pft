@@ -136,7 +136,12 @@ public class NewContactData {
   }
 
   public File getPhoto() {
-    return new File(photo);
+    if (photo == null) {
+      return null;
+    } else {
+
+      return new File(photo);
+    }
   }
 
   public NewContactData withId(int id) {
@@ -228,6 +233,10 @@ public class NewContactData {
     return "NewContactData{" +
             "first_name='" + first_name + '\'' +
             ", last_name='" + last_name + '\'' +
+            ", email='" + email + '\'' +
+            ", email2='" + email2 + '\'' +
+            ", email3='" + email3 + '\'' +
+            ", gruop='" + gruop + '\'' +
             ", id=" + id +
             '}';
   }
@@ -239,14 +248,21 @@ public class NewContactData {
     NewContactData that = (NewContactData) o;
     return id == that.id &&
             Objects.equals(first_name, that.first_name) &&
-            Objects.equals(last_name, that.last_name);
+            Objects.equals(last_name, that.last_name) &&
+            Objects.equals(company, that.company) &&
+            Objects.equals(address, that.address) &&
+            Objects.equals(home, that.home) &&
+            Objects.equals(mobile, that.mobile) &&
+            Objects.equals(work, that.work) &&
+            Objects.equals(fax, that.fax) &&
+            Objects.equals(email, that.email) &&
+            Objects.equals(email2, that.email2) &&
+            Objects.equals(email3, that.email3);
   }
 
   @Override
   public int hashCode() {
 
-    return Objects.hash(first_name, last_name, id);
+    return Objects.hash(first_name, last_name, company, address, home, mobile, work, fax, email, email2, email3, id);
   }
-
-
 }

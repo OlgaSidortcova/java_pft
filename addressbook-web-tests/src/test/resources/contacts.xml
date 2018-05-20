@@ -1,15 +1,6 @@
 <list>
   <contact>
-    <first__name>Fname 0</first__name>
     <last__name>Lname 0</last__name>
-    <company>Company 0</company>
-    <address>Adress 0</address>
-    <home>123 0</home>
-    <work>789 0</work>
-    <fax>fax 0</fax>
-    <email>mama@mail.ru 0</email>
-    <email3>pusto@gmail.ru</email3>
-    <photo>src/test/resources/photo.jpg</photo>
   </contact>
   <contact>
     <first__name>Fname 1</first__name>
@@ -19,8 +10,6 @@
     <home>123 1</home>
     <work>789 1</work>
     <fax>fax 1</fax>
-    <email>mama@mail.ru 1</email>
-    <email3>pusto@gmail.ru</email3>
     <photo>src/test/resources/photo.jpg</photo>
   </contact>
   <contact>
@@ -28,10 +17,30 @@
     <last__name>Lname 2</last__name>
     <company>Company 2</company>
     <address>Adress 2</address>
-    <home>123 2</home>
-    <work>789 2</work>
     <fax>fax 2</fax>
     <email>mama@mail.ru 2</email>
+    <email3>pusto@gmail.ru</email3>
+    <photo>src/test/resources/photo.jpg</photo>
+  </contact>
+  <contact>
+    <first__name>Fname 3</first__name>
+    <last__name>Lname 3</last__name>
+    <company>Company 3</company>
+    <address>Adress 3</address>
+    <home>123 3</home>
+    <work>789 3</work>
+    <email>mama@mail.ru 3</email>
+    <email3>pusto@gmail.ru</email3>
+    <photo>src/test/resources/photo.jpg</photo>
+  </contact>
+  <contact>
+    <first__name>Fname 4</first__name>
+    <company>Company 4</company>
+    <address>Adress 4</address>
+    <home>123 4</home>
+    <work>789 4</work>
+    <fax>fax 4</fax>
+    <email>mama@mail.ru 4</email>
     <email3>pusto@gmail.ru</email3>
     <photo>src/test/resources/photo.jpg</photo>
   </contact>

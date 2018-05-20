@@ -36,6 +36,42 @@ public class ContactHelper extends HelperBase {
     type(By.name("email3"), newContactData.getEmail3());
     attach(By.name("photo"), newContactData.getPhoto());
 
+    if (newContactData.getFirst_name() == null) {
+      newContactData.withFirst_name("");
+    }
+    if (newContactData.getLast_name() == null) {
+      newContactData.withLast_name("");
+    }
+
+    if (newContactData.getCompany() == null) {
+      newContactData.withCompany("");
+    }
+    if (newContactData.getAddress() == null) {
+      newContactData.withAddress("");
+    }
+
+    if (newContactData.getHome() == null) {
+      newContactData.withHome("");
+    }
+    if (newContactData.getMobile() == null) {
+      newContactData.withMobile("");
+    }
+    if (newContactData.getWork() == null) {
+      newContactData.withWork("");
+    }
+
+    if (newContactData.getFax() == null) {
+      newContactData.withFax("");
+    }
+    if (newContactData.getEmail() == null) {
+      newContactData.withEmail("");
+    }
+    if (newContactData.getEmail2() == null) {
+      newContactData.withEmail2("");
+    }
+    if (newContactData.getEmail3() == null) {
+      newContactData.withEmail3("");
+    }
 
     if (creation) {
       if (newContactData.getGruop() == null) {
@@ -46,6 +82,8 @@ public class ContactHelper extends HelperBase {
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
+
+
   }
 
   public void initNewContactCreation() {

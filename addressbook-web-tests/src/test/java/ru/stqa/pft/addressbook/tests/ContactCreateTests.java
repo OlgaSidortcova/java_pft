@@ -48,10 +48,11 @@ try(  BufferedReader reader = new BufferedReader(new FileReader(new File("src/te
   public void testNewContact2(NewContactData contact) {
 
     app.goTo().gotoHomePage();
-    Contacts before = app.contact().all();
+   // Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
 
     app.goTo().groupPage();
-    Groups group = app.group().all();
+    Groups group = app.db().groups();
     app.goTo().groupPage();
     if (group.size()!=0) {
       GroupData selectGroup = group.iterator().next();
@@ -62,22 +63,18 @@ try(  BufferedReader reader = new BufferedReader(new FileReader(new File("src/te
 
     assertThat(app.contact().count(), equalTo(before.size() + 1));
 
-    app.goTo().gotoHomePage();
-    Contacts after = app.contact().all();
+ //   app.goTo().gotoHomePage();
+   // Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
+   // System.out.println(before);
+  //  System.out.println(after);
+ //   contact = contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
+
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
 
-  @Test(enabled = false)
-  public void testCurrentDir() {
 
-    File correntDir = new File(".");
-    correntDir.getAbsolutePath();
-    File photo = new File("src/test/resources/tyri.jpg");
-    System.out.println(correntDir.getAbsolutePath());
-    System.out.println(photo.getAbsolutePath());
-    System.out.println(photo.exists());
-  }
 
 }
 
