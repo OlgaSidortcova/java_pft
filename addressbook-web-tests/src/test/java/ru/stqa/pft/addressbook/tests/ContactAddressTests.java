@@ -7,7 +7,6 @@ import ru.stqa.pft.addressbook.model.NewContactData;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-
 public class ContactAddressTests extends TestBase {
 
   @BeforeMethod
@@ -25,13 +24,10 @@ public class ContactAddressTests extends TestBase {
 
   @Test
   public void testContactAddress() {
-
     app.goTo().gotoHomePage();
     NewContactData contact = app.contact().all().iterator().next();
     NewContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
     assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
-
   }
-
 }

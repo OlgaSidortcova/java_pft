@@ -12,7 +12,6 @@ public class DbConnectionTest {
   public void testdbConnection() {
 
     Connection conn = null;
-
     try {
       conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/addressbook?serverTimezone=UTC&user=root&password=");
 
@@ -31,7 +30,6 @@ public class DbConnectionTest {
       System.out.println(groups);
 
     } catch (SQLException ex) {
-      // handle any errors
       System.out.println("SQLException: " + ex.getMessage());
       System.out.println("SQLState: " + ex.getSQLState());
       System.out.println("VendorError: " + ex.getErrorCode());

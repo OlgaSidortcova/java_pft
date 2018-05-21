@@ -24,37 +24,28 @@ public class ContactCreateTests extends TestBase {
   @DataProvider
   public Iterator<Object[]> validContacts() throws IOException {
     String xml = "";
-try(  BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")));
-) {
+    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")))) {
 
-
-  //BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")));
-  String line = reader.readLine();
-  while (line != null) {
-    xml += line;
-
-    line = reader.readLine();
-
+      String line = reader.readLine();
+      while (line != null) {
+        xml += line;
+        line = reader.readLine();
+      }
+      XStream xstream = new XStream();
+      xstream.processAnnotations(NewContactData.class);
+      List<NewContactData> contacts = (List<NewContactData>) xstream.fromXML(xml);
+      return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
+    }
   }
-  XStream xstream = new XStream();
-  xstream.processAnnotations(NewContactData.class);
-  List<NewContactData> contacts = (List<NewContactData>) xstream.fromXML(xml);
-  return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
-}
-  }
-
 
   @Test(dataProvider = "validContacts") //(enabled = false)
   public void testNewContact2(NewContactData contact) {
-
     app.goTo().gotoHomePage();
-   // Contacts before = app.contact().all();
     Contacts before = app.db().contacts();
-
-    app.goTo().groupPage();
     Groups group = app.db().groups();
-    app.goTo().groupPage();
-    if (group.size()!=0) {
+
+    if (group.size() != 0) {
+      app.goTo().groupPage();
       GroupData selectGroup = group.iterator().next();
       contact = contact.withGruop(selectGroup.getName());
     }
@@ -62,20 +53,11 @@ try(  BufferedReader reader = new BufferedReader(new FileReader(new File("src/te
     app.goTo().returnToHomePage();
 
     assertThat(app.contact().count(), equalTo(before.size() + 1));
-
- //   app.goTo().gotoHomePage();
-   // Contacts after = app.contact().all();
     Contacts after = app.db().contacts();
-   // System.out.println(before);
-  //  System.out.println(after);
- //   contact = contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
 
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
-
-
-
 }
 
 

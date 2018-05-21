@@ -14,9 +14,7 @@ public class ContactHelper extends HelperBase {
 
 
   public ContactHelper(WebDriver wd) {
-
     super(wd);
-
   }
 
   public void fillNewContact(NewContactData newContactData, boolean creation) {
@@ -82,45 +80,36 @@ public class ContactHelper extends HelperBase {
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
-
-
   }
 
   public void initNewContactCreation() {
-
     click(By.linkText("add new"));
   }
 
   public void submitNewContactCreation() {
-
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
   public void editContactById(int id) {
-
     wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr/td/input[@value='" + id + "']/../../td[8]/a/img")).click();
 
   }
 
   public void submitContactModification() {
-
     click(By.name("update"));
 
   }
 
   public void selectContactById(int id) {
     wd.findElement(By.cssSelector("input[value = '" + id + "' ]")).click();
-
   }
 
   public void deleteSelectedContacts() {
 
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
-
   }
 
   public void submitDeletionContact() {
-
     swich();
   }
 
@@ -141,7 +130,6 @@ public class ContactHelper extends HelperBase {
       String firstName = cells.get(2).getText();
       String lastName = cells.get(1).getText();
       String allPhones = cells.get(5).getText();
-      // String[] phones = cells.get(5).getText().split("\n");
       String address = cells.get(3).getText();
       String allEmails = cells.get(4).getText();
 

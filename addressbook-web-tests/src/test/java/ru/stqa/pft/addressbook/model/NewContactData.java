@@ -13,15 +13,12 @@ import java.util.Objects;
 @XStreamAlias("contact")
 public class NewContactData {
   @Column(name = "firstname")
- // @Type(type = "text")
   private String first_name;
 
   @Column(name = "lastname")
- // @Type(type = "text")
   private String last_name;
 
   @Column(name = "company")
- // @Type(type = "varchar")
   private String company;
 
   @Column(name = "address")
@@ -56,7 +53,7 @@ public class NewContactData {
   @Type(type = "text")
   private String email3;
 
-  @Transient//@Column(name = "firstname")
+  @Transient
   private String gruop;
 
   @Id
@@ -117,7 +114,6 @@ public class NewContactData {
   public String getEmail3() {
     return email3;
   }
-
 
   public String getGruop() {
     return gruop;

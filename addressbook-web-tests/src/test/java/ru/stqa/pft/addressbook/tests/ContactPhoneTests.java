@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-
 public class ContactPhoneTests extends TestBase {
 
   @BeforeMethod
@@ -44,6 +43,5 @@ public class ContactPhoneTests extends TestBase {
 
   public static String cleaned(String phone) {
     return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
-
   }
 }

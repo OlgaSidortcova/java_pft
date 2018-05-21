@@ -28,8 +28,6 @@ public class ContactDataGenerator {
   public static void main(String[] args) throws IOException {
 
     ContactDataGenerator generator = new ContactDataGenerator();
-
-
     JCommander jcommander = new JCommander(generator);
     try {
       jcommander.parse(args);
@@ -41,7 +39,6 @@ public class ContactDataGenerator {
   }
 
   private void run() throws IOException {
-
     List<NewContactData> contacts = generateContacts(count);
     if (format.equals("csv")) {
       saveAsCsv(contacts, new File(file));
@@ -53,38 +50,31 @@ public class ContactDataGenerator {
   }
 
   private void saveAsXml(List<NewContactData> contacts, File file) throws IOException {
-
     XStream xstream = new XStream();
     xstream.processAnnotations(NewContactData.class);
     String xml = xstream.toXML(contacts);
-   try( Writer writer = new FileWriter(file)){
-    writer.write(xml);
-   }
-
-   // writer.close();
-
-
+    try (Writer writer = new FileWriter(file)) {
+      writer.write(xml);
+    }
   }
 
   private static void saveAsCsv(List<NewContactData> contacts, File file) throws IOException {
-    //Writer writer = new FileWriter(file);
+
     System.out.println(new File(".").getAbsolutePath());
 
-    try( Writer writer = new FileWriter(file)) {
+    try (Writer writer = new FileWriter(file)) {
       for (NewContactData contact : contacts) {
         writer.write(String.format("%s; %s; %s\n", contact.getFirst_name(), contact.getLast_name(), contact.getCompany(),
                 contact.getAddress(), contact.getHome(), contact.getMobile(), contact.getWork(), contact.getFax(),
                 contact.getEmail(), contact.getEmail2(), contact.getEmail3(), contact.getPhoto()));
 
       }
-      // writer.close();
+
     }
   }
 
   private static List<NewContactData> generateContacts(int count) {
-
     List<NewContactData> contacts = new ArrayList<NewContactData>();
-
     for (int i = 0; i < count; i++) {
 
       contacts.add(new NewContactData().withFirst_name(String.format("Fname %s", i)).
@@ -94,12 +84,10 @@ public class ContactDataGenerator {
               withWork(String.format("789 %s", i)).withFax(String.format("fax %s", i)).
               withEmail(String.format("mama@mail.ru %s", i)).//withEmail2(String.format("papa@yandex.ru %s", i)).
               withEmail3(String.format("pusto@gmail.ru", i)).
-                      withPhoto(new File(String.format("src/test/resources/photo.jpg", i)))
-
+              withPhoto(new File(String.format("src/test/resources/photo.jpg", i)))
       );
 
     }
-
     return contacts;
   }
 }

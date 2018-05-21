@@ -3,8 +3,6 @@ package ru.stqa.pft.addressbook.tests;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
@@ -23,19 +21,15 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class GroupCreateTests extends TestBase {
 
-//  Logger logger = LoggerFactory.getLogger(GroupCreateTests.class);
-
   @DataProvider
   public Iterator<Object[]> validGroupsFromXml() throws IOException {
 
     String xml = "";
     try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/group.xml")));
     ) {
-      //  BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/group.xml")));
       String line = reader.readLine();
       while (line != null) {
         xml += line;
-
         line = reader.readLine();
       }
       XStream xstream = new XStream();
@@ -49,8 +43,6 @@ public class GroupCreateTests extends TestBase {
   public Iterator<Object[]> validGroupsFromJson() throws IOException {
     String json = "";
     try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/group.json")))) {
-
-      // BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/group.json")));
       String line = reader.readLine();
       while (line != null) {
         json += line;
@@ -59,7 +51,7 @@ public class GroupCreateTests extends TestBase {
       }
       Gson gson = new Gson();
       List<GroupData> groups = gson.fromJson(json, new TypeToken<List<GroupData>>() {
-      }.getType());// List<GroupData.class
+      }.getType());
 
       return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
     }
@@ -68,12 +60,12 @@ public class GroupCreateTests extends TestBase {
   @Test(dataProvider = "validGroupsFromXml")// (enabled = false)
   public void testGroupCreation2(GroupData group) {
     app.goTo().groupPage();
-    //Groups before = app.group().all();
+
     Groups before = app.db().groups();
     app.group().create(group);
-    app.goTo().groupPage();////
+    app.goTo().groupPage();
     assertThat(app.group().count(), equalTo(before.size() + 1));
-    //Groups after = app.group().all();
+
     Groups after = app.db().groups();
     assertThat(after, equalTo(
             before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
@@ -81,37 +73,30 @@ public class GroupCreateTests extends TestBase {
 
   @Test(dataProvider = "validGroupsFromJson")// (enabled = false)
   public void testGroupCreation1(GroupData group) {
-
-   app.goTo().groupPage();
-
-    // Groups before = app.group().all();
-
+    app.goTo().groupPage();
     Groups before = app.db().groups();
-
 
     app.group().create(group);
     app.goTo().groupPage();
     assertThat(app.group().count(), equalTo(before.size() + 1));
-   // Groups after = app.group().all();
+
     Groups after = app.db().groups();
     System.out.println(before);
     System.out.println(after);
     assertThat(after, equalTo(
             before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-
-
   }
 
   @Test(enabled = false)
   public void testBadGroupCreation2() {
     app.goTo().groupPage();
-    Groups before = app.group().all();
+    Groups before = app.db().groups();
 
     GroupData group = new GroupData().withName("text1' ");
     app.group().create(group);
 
     assertThat(app.group().count(), equalTo(before.size()));
-    Groups after = app.group().all();
+    Groups after = app.db().groups();
 
     assertThat(after, equalTo(before));
   }

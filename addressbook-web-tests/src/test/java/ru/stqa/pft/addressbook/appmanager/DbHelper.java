@@ -17,18 +17,14 @@ public class DbHelper {
   private final SessionFactory sessionFactory;
 
   public DbHelper() {
-
-    // A SessionFactory is set up once for an application!
     final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-            .configure() // configures settings from hibernate.cfg.xml
+            .configure()
             .build();
 
     sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
   }
 
-
   public Groups groups() {
-
     Session session = sessionFactory.openSession();
     session.beginTransaction();
     List<GroupData> result = session.createQuery("from GroupData").list();
@@ -38,14 +34,11 @@ public class DbHelper {
     return new Groups(result);
   }
 
-
   public Contacts contacts() {
 
     Session session = sessionFactory.openSession();
     session.beginTransaction();
-    //  List<GroupData> result = session.createQuery( "from GroupData" ).list();
     List<NewContactData> result = session.createQuery("from NewContactData where deprecated = 0000-00-00").list();
-
 
     session.getTransaction().commit();
     session.close();

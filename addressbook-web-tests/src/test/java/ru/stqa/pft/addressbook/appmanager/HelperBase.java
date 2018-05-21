@@ -8,8 +8,6 @@ import org.openqa.selenium.WebDriver;
 import java.io.File;
 
 public class HelperBase {
-
-
   WebDriver wd;
 
   public HelperBase(WebDriver wd) {
@@ -21,9 +19,7 @@ public class HelperBase {
   }
 
   protected void swich() {
-
     wd.switchTo().alert().accept();
-
   }
 
   protected void type(By locator, String text) {
@@ -37,13 +33,14 @@ public class HelperBase {
       }
     }
   }
+
   protected void attach(By locator, File photo) {
 
     if (photo != null) {
-        wd.findElement(locator).sendKeys(photo.getAbsolutePath());
-
+      wd.findElement(locator).sendKeys(photo.getAbsolutePath());
     }
   }
+
   public boolean isAlertPresent() {
     try {
       wd.switchTo().alert();

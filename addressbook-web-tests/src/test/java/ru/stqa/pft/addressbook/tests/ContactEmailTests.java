@@ -33,8 +33,8 @@ public class ContactEmailTests extends TestBase {
     NewContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
     assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
-
   }
+
   private String mergeEmails(NewContactData contact) {
 
     return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3()).stream().filter((s) -> !s.equals("")).
@@ -44,7 +44,5 @@ public class ContactEmailTests extends TestBase {
 
   public static String cleaned(String email) {
     return email.replaceAll("\\s", "");
-
   }
-
 }

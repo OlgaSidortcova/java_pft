@@ -12,7 +12,6 @@ public class GroupHelper extends HelperBase {
 
   public GroupHelper(WebDriver wd) {
     super(wd);
-
   }
 
   public void submitGroupCreation() {
@@ -21,11 +20,18 @@ public class GroupHelper extends HelperBase {
 
   public void fillGroupCreation(GroupData groupData) {
     type(By.name("group_name"), groupData.getName());
-
     type(By.name("group_header"), groupData.getHeader());
-
     type(By.name("group_footer"), groupData.getFooter());
 
+    if (groupData.getName() == null) {
+      groupData.withName("");
+    }
+    if (groupData.getHeader() == null) {
+      groupData.withHeader("");
+    }
+    if (groupData.getFooter() == null) {
+      groupData.withFooter("");
+    }
   }
 
   public void initGroupCreation() {
@@ -36,18 +42,15 @@ public class GroupHelper extends HelperBase {
     click(By.linkText("group page"));
   }
 
-
   public void deleteSelectedGroups() {
     click(By.name("delete"));
   }
 
-  public void secectGroupById( int id) {
+  public void secectGroupById(int id) {
     wd.findElement(By.cssSelector("input[value = '" + id + "' ]")).click();
-
   }
 
   public void initGruopModification() {
-
     click(By.name("edit"));
   }
 
@@ -56,7 +59,6 @@ public class GroupHelper extends HelperBase {
   }
 
   public void create(GroupData group) {
-
     initGroupCreation();
     fillGroupCreation(group);
 
@@ -64,10 +66,10 @@ public class GroupHelper extends HelperBase {
     groupCashe = null;
     returnToGroupPage();
   }
+
   public void modify(GroupData group) {
     secectGroupById(group.getId());
     initGruopModification();
-
 
     fillGroupCreation(group);
     submitGruopModification();
@@ -82,19 +84,15 @@ public class GroupHelper extends HelperBase {
 
     groupCashe = null;
     returnToGroupPage();
-
   }
 
-private  Groups groupCashe = null;
-
+  private Groups groupCashe = null;
 
   public Groups all() {
 
     if (groupCashe != null) {
-      return  new Groups(groupCashe);
+      return new Groups(groupCashe);
     }
-
-
 
     groupCashe = new Groups();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
@@ -109,8 +107,7 @@ private  Groups groupCashe = null;
     return new Groups(groupCashe);
   }
 
- public int count(){
-
+  public int count() {
     return wd.findElements(By.name("selected[]")).size();
- }
+  }
 }
