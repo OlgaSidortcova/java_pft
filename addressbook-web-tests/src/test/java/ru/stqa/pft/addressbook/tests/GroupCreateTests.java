@@ -69,6 +69,7 @@ public class GroupCreateTests extends TestBase {
     Groups after = app.db().groups();
     assertThat(after, equalTo(
             before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+    veryfaiGroupListInUi();
   }
 
   @Test(dataProvider = "validGroupsFromJson")// (enabled = false)
@@ -85,6 +86,7 @@ public class GroupCreateTests extends TestBase {
     System.out.println(after);
     assertThat(after, equalTo(
             before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+    veryfaiGroupListInUi();
   }
 
   @Test(enabled = false)
