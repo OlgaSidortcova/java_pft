@@ -45,10 +45,17 @@ public class ContactCreateTests extends TestBase {
     Groups group = app.db().groups();
 
     if (group.size() != 0) {
-      app.goTo().groupPage();
+      app.goTo().groupPage();//77777
       GroupData selectGroup = group.iterator().next();
-      contact = contact.withGruop(selectGroup.getName());
+     // contact = contact.inGruop(group.iterator().next());
+      contact = contact.withGroup(selectGroup.getName());
+    }else {
+      app.goTo().groupPage();
+      app.group().create(new GroupData().withName("test1").withFooter("test3"));
+
     }
+
+   // app.goTo().gotoHomePage();
     app.contact().create(contact);
     app.goTo().returnToHomePage();
 
@@ -57,7 +64,7 @@ public class ContactCreateTests extends TestBase {
 
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-    veryfaiGroupListInUi();
+    veryfaiContactListInUi();
   }
 }
 

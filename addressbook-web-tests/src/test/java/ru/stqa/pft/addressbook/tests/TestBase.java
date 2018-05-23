@@ -8,8 +8,10 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
+import ru.stqa.pft.addressbook.model.NewContactData;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -46,12 +48,23 @@ public class TestBase {
 
   public void veryfaiGroupListInUi() {
 
-    if (Boolean.getBoolean("verifyUi")){
-    Groups dbGroups = app.db().groups();
-    Groups uiGroups = app.group().all();
+    if (Boolean.getBoolean("verifyUi")) {
+      Groups dbGroups = app.db().groups();
+      Groups uiGroups = app.group().all();
 
-    assertThat(uiGroups, equalTo(dbGroups.stream().
-            map((g)-> new GroupData().withName(g.getName()).withId(g.getId())).collect(Collectors.toSet())));
+      assertThat(uiGroups, equalTo(dbGroups.stream().
+              map((g) -> new GroupData().withName(g.getName()).withId(g.getId())).collect(Collectors.toSet())));
+    }
   }
+
+  public void veryfaiContactListInUi() {
+
+    if (Boolean.getBoolean("verifyUi")) {
+      Contacts dbContacts = app.db().contacts();
+      Contacts uiContacts = app.contact().all();
+
+      assertThat(uiContacts, equalTo(dbContacts.stream().
+              map((g) -> new NewContactData().withLast_name(""))).collect(Collectors.toSet())));
+    }
   }
 }

@@ -72,14 +72,37 @@ public class ContactHelper extends HelperBase {
     }
 
     if (creation) {
-      if (newContactData.getGruop() == null) {
+      if (newContactData.getGroup() == null) {
         type(By.name("new_group"), null);
       } else
-        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(newContactData.getGruop());
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(newContactData.getGroup());
 
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
-    }
+   }
+
+
+/*
+int a = newContactData.getGruops().size();
+    System.out.println(a);
+
+
+    if (creation) {
+      if (newContactData.getGruops().size() > 0) {
+        Assert.assertTrue(newContactData.getGruops().size() == 1);
+        new Select(wd.findElement(By.name("new_group"))).
+                selectByVisibleText(newContactData.getGruops().iterator().next().getName());
+
+
+        //    type(By.name("new_group"), null);
+        //  } else
+        //   new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(newContactData.getGruop());
+
+      } else {
+        type(By.name("new_group"), "");
+        Assert.assertFalse(isElementPresent(By.name("new_group")));
+      }
+    }*/
   }
 
   public void initNewContactCreation() {
