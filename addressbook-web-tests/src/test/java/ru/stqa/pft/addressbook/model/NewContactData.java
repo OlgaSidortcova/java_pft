@@ -6,7 +6,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -53,8 +55,13 @@ public class NewContactData {
   @Type(type = "text")
   private String email3;
 
-  @Transient
-  private String gruop;
+  // @Transient
+  // private String gruop;
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
+          joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
+
 
   @Id
   @Column(name = "id")
@@ -115,8 +122,12 @@ public class NewContactData {
     return email3;
   }
 
-  public String getGruop() {
-    return gruop;
+ // public String getGruop() {
+ //   return gruop;
+ // }
+
+  public Groups getGroups() {
+    return new Groups(groups);
   }
 
   public int getId() {
@@ -201,10 +212,10 @@ public class NewContactData {
     return this;
   }
 
-  public NewContactData withGruop(String gruop) {
-    this.gruop = gruop;
-    return this;
-  }
+ // public NewContactData withGruop(String gruop) {
+  //  this.gruop = gruop;
+ //   return this;
+//  }
 
   public NewContactData withAllPhones(String allphones) {
 
@@ -232,7 +243,7 @@ public class NewContactData {
             ", email='" + email + '\'' +
             ", email2='" + email2 + '\'' +
             ", email3='" + email3 + '\'' +
-            ", gruop='" + gruop + '\'' +
+            ", gruops='" + groups + '\'' +
             ", id=" + id +
             '}';
   }
@@ -261,4 +272,14 @@ public class NewContactData {
 
     return Objects.hash(first_name, last_name, company, address, home, mobile, work, fax, email, email2, email3, id);
   }
+
+  public NewContactData inGroup(GroupData group) {
+
+    int i =2;
+   // gruops.add(group);
+    groups.add(group);
+    int h =3;
+    return this;
+  }
+
 }

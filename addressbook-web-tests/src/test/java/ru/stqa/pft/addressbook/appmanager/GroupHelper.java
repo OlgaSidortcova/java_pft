@@ -50,11 +50,11 @@ public class GroupHelper extends HelperBase {
     wd.findElement(By.cssSelector("input[value = '" + id + "' ]")).click();
   }
 
-  public void initGruopModification() {
+  public void initGroupModification() {
     click(By.name("edit"));
   }
 
-  public void submitGruopModification() {
+  public void submitGroupModification() {
     click(By.name("update"));
   }
 
@@ -69,10 +69,10 @@ public class GroupHelper extends HelperBase {
 
   public void modify(GroupData group) {
     secectGroupById(group.getId());
-    initGruopModification();
+    initGroupModification();
 
     fillGroupCreation(group);
-    submitGruopModification();
+    submitGroupModification();
 
     groupCashe = null;
     returnToGroupPage();

@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.Groups;
 import ru.stqa.pft.addressbook.model.NewContactData;
 
 import java.util.List;
@@ -70,9 +71,9 @@ public class ContactHelper extends HelperBase {
     if (newContactData.getEmail3() == null) {
       newContactData.withEmail3("");
     }
-
+/*
     if (creation) {
-      if (newContactData.getGruop() == null) {
+      if (newContactData.getGroup() == null) {
         type(By.name("new_group"), null);
       } else
         new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(newContactData.getGruop());
@@ -80,6 +81,37 @@ public class ContactHelper extends HelperBase {
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
+    */
+    //if (newContactData.getGroups() == null) {
+   //   System.out.println("newContactData.getGroups()");
+//
+  //  }
+  // System.out.println(newContactData.getGroups());
+ //   Groups g = newContactData.getGroups();
+  //  System.out.println(newContactData.getGroups());
+
+    int i = newContactData.getGroups().size();
+    if (creation) {
+    //  if (newContactData.getGroups() != null) {
+        if (newContactData.getGroups().size() > 0) {
+          Assert.assertTrue(newContactData.getGroups().size() == 1);
+          new Select(wd.findElement(By.name("new_group"))).
+                  selectByVisibleText(newContactData.getGroups().iterator().next().getName());
+
+          // type(By.name("new_group"), null);
+          // } else
+          //  new Select(wd.findElement(By.name("new_group"))).
+          //          selectByVisibleText(newContactData.getGroups().iterator().next().getName());
+
+     //   }
+    ///  } else {
+  //      type(By.name("new_group"), null);
+      }
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
+
+
   }
 
   public void initNewContactCreation() {
