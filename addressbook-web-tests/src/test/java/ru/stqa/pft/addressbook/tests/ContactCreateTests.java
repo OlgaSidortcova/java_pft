@@ -43,22 +43,15 @@ public class ContactCreateTests extends TestBase {
     app.goTo().gotoHomePage();
     Contacts before = app.db().contacts();
     Groups groups = app.db().groups();
-////////////////
-
 
     if (groups.size() != 0) {
       app.goTo().groupPage();
-     //GroupData selectGroup = groups.iterator().next();
-      // contact = contact.inGroup(selectGroup);
-      contact = contact.inGroup(null);
+
       contact = contact.inGroup(groups.iterator().next());
       app.contact().create(contact);
 
-    } else {
-      app.goTo().groupPage();
-      app.group().create(new GroupData().withName("test1").withFooter("test3"));
-      app.contact().create(contact);
-    }
+    } else app.contact().create(contact);
+
     app.goTo().returnToHomePage();
 
     assertThat(app.contact().count(), equalTo(before.size() + 1));

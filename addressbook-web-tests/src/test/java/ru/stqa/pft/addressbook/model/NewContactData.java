@@ -281,5 +281,9 @@ public class NewContactData {
     int h =3;
     return this;
   }
+private Object readResolve(){
 
+    groups = new HashSet<GroupData>();
+    return this;
+}
 }
