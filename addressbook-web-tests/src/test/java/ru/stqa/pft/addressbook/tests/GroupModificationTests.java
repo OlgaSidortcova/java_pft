@@ -19,14 +19,13 @@ public class GroupModificationTests extends TestBase {
     }
   }
 
-
   @Test//(enabled = false)
   public void testGroupModification() {
     Groups before = app.db().groups();
     GroupData modifiedGroup = before.iterator().next();
 
     GroupData group = new GroupData().
-            withName("test1").withHeader("test2").withFooter("test3").withId(modifiedGroup.getId());
+            withName("test123").withHeader("test2").withFooter("test3").withId(modifiedGroup.getId());
     app.goTo().groupPage();
     app.group().modify(group);
     assertThat(app.group().count(), equalTo(before.size()));

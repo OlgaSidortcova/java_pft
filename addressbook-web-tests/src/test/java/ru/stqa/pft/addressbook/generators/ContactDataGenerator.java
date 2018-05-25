@@ -67,9 +67,7 @@ public class ContactDataGenerator {
         writer.write(String.format("%s; %s; %s\n", contact.getFirst_name(), contact.getLast_name(), contact.getCompany(),
                 contact.getAddress(), contact.getHome(), contact.getMobile(), contact.getWork(), contact.getFax(),
                 contact.getEmail(), contact.getEmail2(), contact.getEmail3(), contact.getPhoto()));
-
       }
-
     }
   }
 
@@ -86,7 +84,6 @@ public class ContactDataGenerator {
               withEmail3(String.format("pusto@gmail.ru", i)).
               withPhoto(new File(String.format("src/test/resources/photo.jpg", i)))
       );
-
     }
     return contacts;
   }

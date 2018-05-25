@@ -55,13 +55,10 @@ public class NewContactData {
   @Type(type = "text")
   private String email3;
 
-  // @Transient
-  // private String gruop;
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "address_in_groups",
           joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
   private Set<GroupData> groups = new HashSet<GroupData>();
-
 
   @Id
   @Column(name = "id")
@@ -121,10 +118,6 @@ public class NewContactData {
   public String getEmail3() {
     return email3;
   }
-
- // public String getGruop() {
- //   return gruop;
- // }
 
   public Groups getGroups() {
     return new Groups(groups);
@@ -212,11 +205,6 @@ public class NewContactData {
     return this;
   }
 
- // public NewContactData withGruop(String gruop) {
-  //  this.gruop = gruop;
- //   return this;
-//  }
-
   public NewContactData withAllPhones(String allphones) {
 
     this.allphones = allphones;
@@ -240,9 +228,6 @@ public class NewContactData {
     return "NewContactData{" +
             "first_name='" + first_name + '\'' +
             ", last_name='" + last_name + '\'' +
-            ", email='" + email + '\'' +
-            ", email2='" + email2 + '\'' +
-            ", email3='" + email3 + '\'' +
             ", gruops='" + groups + '\'' +
             ", id=" + id +
             '}';
@@ -276,8 +261,13 @@ public class NewContactData {
     groups.add(group);
     return this;
   }
-private Object readResolve(){
+  public NewContactData outGroup(GroupData group) {
+    groups.remove(group);
+    return this;
+  }
 
+
+private Object readResolve(){
     groups = new HashSet<GroupData>();
     return this;
 }

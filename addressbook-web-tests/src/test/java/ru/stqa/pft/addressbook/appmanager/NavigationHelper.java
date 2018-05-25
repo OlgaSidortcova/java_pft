@@ -28,9 +28,7 @@ public class NavigationHelper extends HelperBase {
 
 
   public void addNextContact() {
-
     click(By.linkText("add next"));
-
   }
 
   public void gotoHomePage() {

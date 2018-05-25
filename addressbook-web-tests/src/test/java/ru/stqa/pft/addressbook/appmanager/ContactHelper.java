@@ -7,13 +7,11 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
-import ru.stqa.pft.addressbook.model.Groups;
 import ru.stqa.pft.addressbook.model.NewContactData;
 
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
-
 
   public ContactHelper(WebDriver wd) {
     super(wd);
@@ -72,17 +70,6 @@ public class ContactHelper extends HelperBase {
     if (newContactData.getEmail3() == null) {
       newContactData.withEmail3("");
     }
-/*
-    if (creation) {
-      if (newContactData.getGroup() == null) {
-        type(By.name("new_group"), null);
-      } else
-        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(newContactData.getGruop());
-
-    } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
-    }
-    */
         if (creation) {
       if (newContactData.getGroups().size() > 0) {
         Assert.assertTrue(newContactData.getGroups().size() == 1);
@@ -117,10 +104,6 @@ public class ContactHelper extends HelperBase {
   public void deleteSelectedContacts() {
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
   }
-
-
-
-
   public void submitDeletionContact() {
     swich();
   }

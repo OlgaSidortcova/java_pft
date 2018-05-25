@@ -12,7 +12,6 @@ public class Contacts extends ForwardingSet<NewContactData> {
 
   public Contacts(Contacts contacts) {
     this.delegate = new HashSet<NewContactData>(contacts.delegate);
-
   }
 
   public Contacts() {
@@ -29,14 +28,12 @@ public class Contacts extends ForwardingSet<NewContactData> {
   }
 
   public Contacts withAdded(NewContactData contact) {
-
     Contacts contacts = new Contacts(this);
     contacts.add(contact);
     return contacts;
   }
 
   public Contacts without(NewContactData contact) {
-
     Contacts contacts = new Contacts(this);
     contacts.remove(contact);
     return contacts;

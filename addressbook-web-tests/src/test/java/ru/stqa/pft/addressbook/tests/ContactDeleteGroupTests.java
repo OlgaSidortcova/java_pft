@@ -7,7 +7,8 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 import ru.stqa.pft.addressbook.model.NewContactData;
 
-import static ru.stqa.pft.addressbook.tests.TestBase.app;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactDeleteGroupTests extends TestBase{
 
@@ -15,7 +16,6 @@ public class ContactDeleteGroupTests extends TestBase{
   public void ensurePreconditions() {
     boolean gr = false;
     GroupData group = new GroupData();
-    int a= 0;
 
     if (app.db().groups().size() == 0) {
       app.goTo().groupPage();
@@ -32,7 +32,6 @@ public class ContactDeleteGroupTests extends TestBase{
       if (gr) {
         contact.inGroup(group);
       }
-
       app.contact().create(contact);
       app.goTo().returnToHomePage();
     }
@@ -40,47 +39,44 @@ public class ContactDeleteGroupTests extends TestBase{
 
   @Test //(enabled = false)
   public void testContactDeleteGroup() {
-    // app.goTo().gotoHomePage();
+
     Contacts contacts = app.db().contacts();
     Groups groups = app.db().groups();
     boolean done = false;
+    NewContactData contact = new NewContactData();
+    Groups begoreGroups = new Groups();
+    GroupData group = new GroupData();
 
-    for (NewContactData contact : contacts) {
-      Groups vacantGroups = contact.getGroups();
-      if (!vacantGroups.isEmpty()) {
-        GroupData vacantGroup = vacantGroups.iterator().next();
-        app.goTo().gotoHomePage();
-        app.contact().selectGroupForDelete(vacantGroup);
-        app.contact().selectContactById(contact.getId());
+    for (NewContactData currentContact : contacts) {
+      begoreGroups = currentContact.getGroups();
 
-        // app.contact().selectGroup(vacantGroup);
-        app.contact().dellFromGroup();
-        app.goTo().gotoHomePage();
+      if (!begoreGroups.isEmpty()) {
+        group = begoreGroups.iterator().next();
+        contact = currentContact;
         done = true;
         break;
       }
     }
     if (!done) {
-      NewContactData contact = contacts.iterator().next();
-      GroupData group = groups.iterator().next();
+      contact = contacts.iterator().next();
+      group = groups.iterator().next();
+
       app.goTo().gotoHomePage();
-      app.contact().selectGroupForDelete(group);
       app.contact().selectContactById(contact.getId());
-
-      // app.contact().selectGroup(vacantGroup);
-      app.contact().dellFromGroup();
-      app.goTo().gotoHomePage();
+      app.contact().selectGroupForAdd(group);
+      app.contact().addToGroup();
+      contact.inGroup(group);
+      begoreGroups = contact.getGroups();
     }
-   // verifyContactListInUi();
-    int i = 2;
-  }
 
-  public void toGroup(GroupData group) {
+    app.goTo().gotoHomePage();
+    app.contact().selectGroupForDelete(group);
+    app.contact().selectContactById(contact.getId());
 
-    // app.goTo().gotoHomePage();
-    // app.contact().selectContactById(contact.getId());
-    //  app.contact().selectGroup(vacantGroup);
-    // app.contact().addToGroup();
+    app.contact().dellFromGroup();
+    app.goTo().gotoHomePage();
+    contact.outGroup(group);
+    assertThat(contact.getGroups(), equalTo(begoreGroups.without(group)));
   }
 }
 

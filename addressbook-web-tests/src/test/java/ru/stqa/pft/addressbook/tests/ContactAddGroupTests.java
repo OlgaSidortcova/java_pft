@@ -1,6 +1,5 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.Contacts;
@@ -8,6 +7,7 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 import ru.stqa.pft.addressbook.model.NewContactData;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactAddGroupTests extends TestBase {
@@ -18,7 +18,7 @@ public class ContactAddGroupTests extends TestBase {
     if (app.db().contacts().size() == 0) {
       app.goTo().gotoHomePage();
       NewContactData contact = new NewContactData().
-              withFirst_name("1FirstName1").withLast_name("2LastName2").withCompany("Company3").withAddress("Address");
+              withFirst_name("111FirstName1").withLast_name("2LastName2").withCompany("Company3").withAddress("Address");
       app.contact().create(contact);
       app.goTo().returnToHomePage();
     }
@@ -32,56 +32,38 @@ public class ContactAddGroupTests extends TestBase {
 
   @Test //(enabled = false)
   public void testContactAddGroup() {
-   // app.goTo().gotoHomePage();
-    Contacts contacts = app.db().contacts();
-    Groups groups = app.db().groups();
+    Contacts allContacts = app.db().contacts();
+    Groups allGroups = app.db().groups();
     boolean done = false;
+    NewContactData contact = new NewContactData();
+    Groups begoreGroups = new Groups();
+    GroupData group = new GroupData();
 
-    for (NewContactData contact : contacts) {
-      Groups vacantGroups = new Groups(groups);
-      vacantGroups.removeAll(contact.getGroups());
+    for (NewContactData currentContact : allContacts) {
+      Groups vacantGroups = new Groups(allGroups);
+      vacantGroups.removeAll(currentContact.getGroups());
 
       if (!vacantGroups.isEmpty()) {
-        GroupData vacantGroup = vacantGroups.iterator().next();
-      //  app.contact().toGroup(vacantGroup);
-
-        app.goTo().gotoHomePage();
-        app.contact().selectContactById(contact.getId());
-        app.contact().selectGroupForAdd(vacantGroup);
-        app.contact().addToGroup();
-        app.goTo().gotoHomePage();
+        contact = currentContact;
+        begoreGroups = contact.getGroups();
+        group = vacantGroups.iterator().next();
         done = true;
         break;
       }
     }
     if (!done) {
       app.goTo().groupPage();
-      GroupData group = new GroupData().withName("newtest1").withFooter("test3");
+      group = group.withName("newtest1").withFooter("test3");
       app.group().create(group);
-      app.goTo().gotoHomePage();
-      NewContactData contact = contacts.iterator().next();
-
-      app.contact().selectContactById(contact.getId());
-      app.contact().selectGroupForAdd(group);
-
-      app.contact().addToGroup();
-
-     // contact.inGroup(group);
-      app.goTo().gotoHomePage();
-      // app.contact().create(contact);
+      contact = allContacts.iterator().next();
+      begoreGroups = contact.getGroups();
     }
-
-    verifyContactListInUi();
-
-
-  }
-
-  public void toGroup(GroupData group){
-
-    // app.goTo().gotoHomePage();
-    // app.contact().selectContactById(contact.getId());
-    //  app.contact().selectGroup(vacantGroup);
-    // app.contact().addToGroup();
+    app.goTo().gotoHomePage();
+    app.contact().selectContactById(contact.getId());
+    app.contact().selectGroupForAdd(group);
+    app.contact().addToGroup();
+    contact.inGroup(group);
+    assertThat(contact.getGroups(), equalTo(begoreGroups.withAdded(group)));
   }
 }
 

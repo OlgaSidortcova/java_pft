@@ -34,7 +34,7 @@ public class GroupData {
   @Column(name = "group_id")
   private int id = Integer.MAX_VALUE;
 
-  @ManyToMany//(mappedBy = "groups")
+  @ManyToMany
   @JoinTable(name = "address_in_groups",
           joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
   private Set<NewContactData> contacts = new HashSet<NewContactData>();
