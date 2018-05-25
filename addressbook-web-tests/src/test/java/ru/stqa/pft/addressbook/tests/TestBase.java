@@ -57,7 +57,7 @@ public class TestBase {
     }
   }
 
-  public void veryfaiContactListInUi() {
+  public void verifyContactListInUi() {
 
     if (Boolean.getBoolean("verifyUi")) {
       Contacts dbContacts = app.db().contacts();

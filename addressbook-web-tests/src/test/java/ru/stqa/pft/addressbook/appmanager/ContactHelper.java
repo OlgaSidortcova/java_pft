@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 import ru.stqa.pft.addressbook.model.NewContactData;
 
@@ -82,26 +83,11 @@ public class ContactHelper extends HelperBase {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
     */
-    //if (newContactData.getGroups() == null) {
-    //   System.out.println("newContactData.getGroups()");
-//
-    //  }
-    // System.out.println(newContactData.getGroups());
-    //   Groups g = newContactData.getGroups();
-    //  System.out.println(newContactData.getGroups());
-
-    // int i = newContactData.getGroups().size();
-
-    if (creation) {
+        if (creation) {
       if (newContactData.getGroups().size() > 0) {
         Assert.assertTrue(newContactData.getGroups().size() == 1);
         new Select(wd.findElement(By.name("new_group"))).
                 selectByVisibleText(newContactData.getGroups().iterator().next().getName());
-
-        // type(By.name("new_group"), null);
-        // } else
-        //  new Select(wd.findElement(By.name("new_group"))).
-        //          selectByVisibleText(newContactData.getGroups().iterator().next().getName());
 
       } else type(By.name("new_group"), null);
 
@@ -118,12 +104,10 @@ public class ContactHelper extends HelperBase {
 
   public void editContactById(int id) {
     wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr/td/input[@value='" + id + "']/../../td[8]/a/img")).click();
-
   }
 
   public void submitContactModification() {
     click(By.name("update"));
-
   }
 
   public void selectContactById(int id) {
@@ -131,9 +115,11 @@ public class ContactHelper extends HelperBase {
   }
 
   public void deleteSelectedContacts() {
-
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
   }
+
+
+
 
   public void submitDeletionContact() {
     swich();
@@ -214,5 +200,24 @@ public class ContactHelper extends HelperBase {
 
   public int count() {
     return wd.findElements(By.name("selected[]")).size();
+  }
+
+  public void selectGroupForAdd(GroupData group) {
+    Select dropdown = new Select(wd.findElement(By.name("to_group")));
+    dropdown.selectByVisibleText(group.getName());
+  }
+
+  public void selectGroupForDelete(GroupData group) {
+    Select dropdown = new Select(wd.findElement(By.name("group")));
+    dropdown.selectByVisibleText(group.getName());
+  }
+  public void addToGroup() {
+
+    wd.findElement(By.name("add")).click();
+  }
+
+  public void dellFromGroup() {
+
+    wd.findElement(By.name("remove")).click();
   }
 }

@@ -269,16 +269,11 @@ public class NewContactData {
 
   @Override
   public int hashCode() {
-
     return Objects.hash(first_name, last_name, company, address, home, mobile, work, fax, email, email2, email3, id);
   }
 
   public NewContactData inGroup(GroupData group) {
-
-    int i =2;
-   // gruops.add(group);
     groups.add(group);
-    int h =3;
     return this;
   }
 private Object readResolve(){
