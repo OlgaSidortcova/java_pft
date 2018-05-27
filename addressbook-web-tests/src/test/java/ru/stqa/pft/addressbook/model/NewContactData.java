@@ -228,7 +228,7 @@ public class NewContactData {
     return "NewContactData{" +
             "first_name='" + first_name + '\'' +
             ", last_name='" + last_name + '\'' +
-            ", gruops='" + groups + '\'' +
+            ", groups='" + groups + '\'' +
             ", id=" + id +
             '}';
   }
@@ -261,11 +261,6 @@ public class NewContactData {
     groups.add(group);
     return this;
   }
-  public NewContactData outGroup(GroupData group) {
-    groups.remove(group);
-    return this;
-  }
-
 
 private Object readResolve(){
     groups = new HashSet<GroupData>();

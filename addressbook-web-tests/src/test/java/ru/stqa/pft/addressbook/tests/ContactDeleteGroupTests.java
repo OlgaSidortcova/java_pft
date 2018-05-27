@@ -40,33 +40,38 @@ public class ContactDeleteGroupTests extends TestBase{
   @Test //(enabled = false)
   public void testContactDeleteGroup() {
 
-    Contacts contacts = app.db().contacts();
-    Groups groups = app.db().groups();
+    Contacts allContacts = app.db().contacts();
+    Groups allGroups = app.db().groups();
     boolean done = false;
     NewContactData contact = new NewContactData();
-    Groups begoreGroups = new Groups();
+    Groups beforeGroups = new Groups();
     GroupData group = new GroupData();
+    int searchId = 0 ;
 
-    for (NewContactData currentContact : contacts) {
-      begoreGroups = currentContact.getGroups();
+    for (NewContactData currentContact : allContacts) {
+      beforeGroups = currentContact.getGroups();
 
-      if (!begoreGroups.isEmpty()) {
-        group = begoreGroups.iterator().next();
+      if (!beforeGroups.isEmpty()) {
+        group = beforeGroups.iterator().next();
         contact = currentContact;
+        searchId = contact.getId();
         done = true;
         break;
       }
     }
     if (!done) {
-      contact = contacts.iterator().next();
-      group = groups.iterator().next();
+      contact = allContacts.iterator().next();
+      group = allGroups.iterator().next();
 
       app.goTo().gotoHomePage();
       app.contact().selectContactById(contact.getId());
       app.contact().selectGroupForAdd(group);
       app.contact().addToGroup();
-      contact.inGroup(group);
-      begoreGroups = contact.getGroups();
+
+      allContacts = app.db().contacts();
+      searchId = contact.getId();
+      contact = allContacts.findContactById(searchId);
+      beforeGroups = contact.getGroups();
     }
 
     app.goTo().gotoHomePage();
@@ -75,8 +80,10 @@ public class ContactDeleteGroupTests extends TestBase{
 
     app.contact().dellFromGroup();
     app.goTo().gotoHomePage();
-    contact.outGroup(group);
-    assertThat(contact.getGroups(), equalTo(begoreGroups.without(group)));
+
+    allContacts = app.db().contacts();
+    contact = allContacts.findContactById(searchId);
+    assertThat(contact.getGroups(), equalTo(beforeGroups.without(group)));
   }
 }
 

@@ -36,7 +36,7 @@ public class ContactAddGroupTests extends TestBase {
     Groups allGroups = app.db().groups();
     boolean done = false;
     NewContactData contact = new NewContactData();
-    Groups begoreGroups = new Groups();
+    Groups beforeGroups = new Groups();
     GroupData group = new GroupData();
 
     for (NewContactData currentContact : allContacts) {
@@ -45,7 +45,7 @@ public class ContactAddGroupTests extends TestBase {
 
       if (!vacantGroups.isEmpty()) {
         contact = currentContact;
-        begoreGroups = contact.getGroups();
+        beforeGroups = contact.getGroups();
         group = vacantGroups.iterator().next();
         done = true;
         break;
@@ -56,14 +56,17 @@ public class ContactAddGroupTests extends TestBase {
       group = group.withName("newtest1").withFooter("test3");
       app.group().create(group);
       contact = allContacts.iterator().next();
-      begoreGroups = contact.getGroups();
+      beforeGroups = contact.getGroups();
     }
     app.goTo().gotoHomePage();
     app.contact().selectContactById(contact.getId());
     app.contact().selectGroupForAdd(group);
     app.contact().addToGroup();
-    contact.inGroup(group);
-    assertThat(contact.getGroups(), equalTo(begoreGroups.withAdded(group)));
+
+    allContacts = app.db().contacts();
+    int searchId = contact.getId();
+    contact = allContacts.findContactById(searchId);
+    assertThat(contact.getGroups(), equalTo(beforeGroups.withAdded(group)));
   }
 }
 

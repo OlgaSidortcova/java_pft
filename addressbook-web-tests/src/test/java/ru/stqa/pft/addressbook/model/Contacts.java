@@ -38,4 +38,8 @@ public class Contacts extends ForwardingSet<NewContactData> {
     contacts.remove(contact);
     return contacts;
   }
+
+  public NewContactData findContactById(int id){
+    return  this.stream().filter((c) -> c.getId() == id).findAny().get();
+  }
 }
