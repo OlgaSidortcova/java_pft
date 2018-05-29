@@ -1,12 +1,12 @@
-package ru.stqa.pft.appmanager;
+
+
+package ru.stqa.pft.mantis.appmanager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.BrowserType;
-import org.openqa.selenium.remote.HttpSessionId;
-import ru.stqa.pft.mantis.appmanager.FtpHelper;
 import ru.stqa.pft.mantis.appmanager.HttpSession;
 import ru.stqa.pft.mantis.appmanager.RegistrationHelper;
 
@@ -15,7 +15,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.MatchResult;
 
 public class ApplicationManager {
 
@@ -24,7 +23,8 @@ public class ApplicationManager {
 
   private String browser;
   private RegistrationHelper registrationHelper;
-  private FtpHelper ftp;
+  private MailHelper mailHelper;
+  // private FtpHelper ftp;
 
 
   public ApplicationManager(String browser) {
@@ -36,8 +36,16 @@ public class ApplicationManager {
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+////////////////
+   /* if (browser.equals(BrowserType.FIREFOX)) {
+      wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("/home/sadsido/Tools/firefox/firefox"));
+    } else if (browser.equals(BrowserType.CHROME)) {
+      wd = new ChromeDriver();
+    }
 
-
+    wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    wd.get(properties.getProperty("web.baseUrl"));
+   */ /////////////
   }
 
   public void stop() {
@@ -63,13 +71,14 @@ public class ApplicationManager {
     }
     return registrationHelper;
   }
-
+/*
   public FtpHelper ftp() {
     if (ftp == null) {
       ftp = new FtpHelper(this);
     }
    return ftp;
   }
+*/
 
   public WebDriver getDriver() {
     if (wd == null) {
@@ -84,5 +93,14 @@ public class ApplicationManager {
       wd.get(properties.getProperty("web.baseUrl"));
     }
     return wd;
+  }
+
+  public MailHelper mail(){
+
+    if (mailHelper == null){
+
+      mailHelper = new MailHelper(this);
+    }
+    return  mailHelper;
   }
 }
