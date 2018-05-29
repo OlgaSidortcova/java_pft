@@ -7,8 +7,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.BrowserType;
-import ru.stqa.pft.mantis.appmanager.HttpSession;
-import ru.stqa.pft.mantis.appmanager.RegistrationHelper;
 
 import java.io.File;
 import java.io.FileReader;
@@ -36,16 +34,7 @@ public class ApplicationManager {
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
-////////////////
-   /* if (browser.equals(BrowserType.FIREFOX)) {
-      wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("/home/sadsido/Tools/firefox/firefox"));
-    } else if (browser.equals(BrowserType.CHROME)) {
-      wd = new ChromeDriver();
-    }
 
-    wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-    wd.get(properties.getProperty("web.baseUrl"));
-   */ /////////////
   }
 
   public void stop() {
@@ -56,7 +45,6 @@ public class ApplicationManager {
 
   public HttpSession newSession() {
     return new HttpSession(this);
-
   }
 
   public String getProperty(String key) {

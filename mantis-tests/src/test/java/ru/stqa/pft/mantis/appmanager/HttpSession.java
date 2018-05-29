@@ -39,7 +39,7 @@ public class HttpSession {
     post.setEntity(new UrlEncodedFormEntity(params));
     CloseableHttpResponse response = httpclient.execute(post);
     String body = getTextFrom(response);
-    return body.contains(String.format("<span class=\"label hidden-xs label-default arrowed\">%s</span>", username));
+     return body.contains(String.format("<span class=\"italic\">%s</span>", username));
 
   }
 
@@ -51,12 +51,10 @@ public class HttpSession {
     }
   }
 
-
   public boolean isLoggedInAs(String username) throws IOException {
     HttpGet get = new HttpGet(app.getProperty("web.baseUrl") + "/index.php");
     CloseableHttpResponse response = httpclient.execute(get);
     String body = getTextFrom(response);
-    return body.contains(String.format("<span class=\"label hidden-xs label-default arrowed\">%s</span>", username));
-
+    return body.contains(String.format("<span class=\"italic\">%s</span>", username));
   }
 }
