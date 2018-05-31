@@ -10,7 +10,6 @@ public class HelperBase {
   protected ApplicationManager app;
 
   public HelperBase(ApplicationManager app) {
-
     this.app = app;
     this.wd = app.getDriver();
   }
@@ -19,7 +18,7 @@ public class HelperBase {
     wd.findElement(locator).click();
   }
 
-    protected void type(By locator, String text) {
+  protected void type(By locator, String text) {
     click(locator);
     if (text != null) {
 
@@ -30,7 +29,6 @@ public class HelperBase {
       }
     }
   }
-
 
   public boolean isAlertPresent() {
     try {
@@ -43,7 +41,6 @@ public class HelperBase {
   }
 
   protected boolean isElementPresent(By locator) {
-
     try {
       wd.findElement(locator);
       return true;

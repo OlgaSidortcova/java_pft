@@ -7,6 +7,5 @@ public class MailMessage {
   public MailMessage(String to, String text) {
     this.to = to;
     this.text = text;
-
   }
 }

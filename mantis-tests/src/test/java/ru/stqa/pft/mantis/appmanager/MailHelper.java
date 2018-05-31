@@ -15,7 +15,6 @@ public class MailHelper {
   private final Wiser wiser;
 
   public MailHelper(ApplicationManager app) {
-
     this.app = app;
     wiser = new Wiser(1025);
   }
@@ -26,7 +25,6 @@ public class MailHelper {
 
       if (wiser.getMessages().size() >= count) {
         return wiser.getMessages().stream().map((m) -> toModelMail(m)).collect(Collectors.toList());
-
       }
       try {
         Thread.sleep(1000);
@@ -34,13 +32,11 @@ public class MailHelper {
 
         e.printStackTrace();
       }
-
     }
     throw new Error("no mail :(");
   }
 
-
-  public static MailMessage toModelMail(WiserMessage m)  {
+  public static MailMessage toModelMail(WiserMessage m) {
 
     try {
       MimeMessage mm = m.getMimeMessage();
@@ -52,17 +48,14 @@ public class MailHelper {
     } catch (IOException e) {
       e.printStackTrace();
       return null;
-
     }
   }
 
   public void start() {
-
     wiser.start();
   }
 
   public void stop() {
-
     wiser.stop();
   }
 }

@@ -84,22 +84,21 @@ public class ApplicationManager {
     return wd;
   }
 
-  public MailHelper mail(){
+  public MailHelper mail() {
 
-    if (mailHelper == null){
+    if (mailHelper == null) {
 
       mailHelper = new MailHelper(this);
     }
-    return  mailHelper;
+    return mailHelper;
   }
 
+  public JamesHelper james() {
 
-  public JamesHelper james(){
-
-    if (jamesHelper == null){
+    if (jamesHelper == null) {
 
       jamesHelper = new JamesHelper(this);
-   }
-   return jamesHelper;
+    }
+    return jamesHelper;
   }
 }

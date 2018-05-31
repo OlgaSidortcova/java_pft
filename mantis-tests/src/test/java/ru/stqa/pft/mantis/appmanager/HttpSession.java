@@ -11,7 +11,6 @@ import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +21,8 @@ public class HttpSession {
   private ApplicationManager app;
 
   public HttpSession(ApplicationManager app) {
-
     this.app = app;
     httpclient = HttpClients.custom().setRedirectStrategy(new LaxRedirectStrategy()).build();
-
   }
 
   public boolean login(String username, String password) throws IOException {
@@ -39,8 +36,7 @@ public class HttpSession {
     post.setEntity(new UrlEncodedFormEntity(params));
     CloseableHttpResponse response = httpclient.execute(post);
     String body = getTextFrom(response);
-     return body.contains(String.format("<span class=\"italic\">%s</span>", username));
-
+    return body.contains(String.format("<span class=\"italic\">%s</span>", username));
   }
 
   private String getTextFrom(CloseableHttpResponse response) throws IOException {

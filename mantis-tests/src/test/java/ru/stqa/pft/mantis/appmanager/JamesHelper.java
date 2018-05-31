@@ -6,12 +6,9 @@ import ru.stqa.pft.mantis.model.MailMessage;
 import javax.mail.*;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintStream;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class JamesHelper {
@@ -38,12 +35,10 @@ public class JamesHelper {
     String result = readUntil("exsist");
     closeTelnetSession();
     return result.trim().equals("user " + name + " exist");
-
   }
 
   public void createUser(String name, String password) {
     initTelnetSession();
-
     write("adduser " + name + " " + password);
     String result = readUntil("User " + name + " added");
     closeTelnetSession();
@@ -72,23 +67,14 @@ public class JamesHelper {
       e.printStackTrace();
     }
 
-    //
-  //  readUntil("Login id:");
-  //  write("");
-
-   // readUntil("Password:");
-  //  write("");
-
-    //
     readUntil("Login id:");
     write(login);
 
     readUntil("Password:");
     write(password);
 
-
     readUntil("Welcome " + login + ". HELP for a list of commands");
-    //int i=3;
+
   }
 
   private String readUntil(String pattern) {
@@ -103,7 +89,6 @@ public class JamesHelper {
         if (ch == lastChar) {
 
           if (sb.toString().endsWith(pattern)) {
-
             return sb.toString();
           }
         }
@@ -129,12 +114,8 @@ public class JamesHelper {
   }
 
   private void closeTelnetSession() {
-
     write("quit");
   }
-
-  // public void d
-
 
   public List<MailMessage> waitForMail(String user, String password, long timeout) throws MessagingException {
     long start = System.currentTimeMillis();
@@ -143,7 +124,6 @@ public class JamesHelper {
 
       if (allMail.size() > 0) {
         return allMail;
-
       }
       try {
         Thread.sleep(1000);
@@ -179,7 +159,6 @@ public class JamesHelper {
   }
 
   private void closeFolder(Folder folder) throws MessagingException {
-
     folder.close(true);
     store.close();
   }
@@ -190,6 +169,5 @@ public class JamesHelper {
     Folder folder = store.getDefaultFolder().getFolder("INBOX");
     folder.open(Folder.READ_WRITE);
     return folder;
-
   }
 }

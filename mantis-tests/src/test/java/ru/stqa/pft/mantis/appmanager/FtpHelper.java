@@ -8,18 +8,14 @@ import java.io.IOException;
 
 public class FtpHelper {
 
-
   private final ApplicationManager app;
-
   private FTPClient ftp;
 
   public FtpHelper(ApplicationManager app) {
 
     this.app = app;
     ftp = new FTPClient();
-
   }
-
 
   public void upload(File file, String target, String backup) throws IOException {
 
@@ -37,9 +33,7 @@ public class FtpHelper {
     ftp.login(app.getProperty("ftp.login"), app.getProperty("ftp.password"));
 
     ftp.deleteFile(target);
-
     ftp.rename(backup, target);
-
     ftp.disconnect();
   }
 }
