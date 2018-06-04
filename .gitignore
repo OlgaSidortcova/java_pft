@@ -7,3 +7,9 @@ sandbox/out
 addressbook-web-tests/out
 addressbook-web-tests/build
 addressbook-web-tests/.gradle
+mantis-tests/out
+mantis-tests/build
+mantis-tests/.gradle
+soap-sample/out
+soap-sample/build
+soap-sample/.gradle
