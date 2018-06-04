@@ -13,3 +13,6 @@ mantis-tests/.gradle
 soap-sample/out
 soap-sample/build
 soap-sample/.gradle
+rest-sample/out
+rest-sample/build
+rest-sample/.gradle
