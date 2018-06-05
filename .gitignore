@@ -16,3 +16,7 @@ soap-sample/.gradle
 rest-sample/out
 rest-sample/build
 rest-sample/.gradle
+github-sample/out
+github-sample/build
+github-sample/.gradle
+.idea/libraries
