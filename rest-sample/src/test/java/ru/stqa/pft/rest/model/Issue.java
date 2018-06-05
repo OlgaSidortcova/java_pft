@@ -1,8 +1,10 @@
-package ru.stqa.pft.rest;
+package ru.stqa.pft.rest.model;
+
+import ru.stqa.pft.rest.tests.TestBase;
 
 import java.util.Objects;
 
-public class Issue {
+public class Issue extends TestBase {
 
 private int id;
 private String subject;

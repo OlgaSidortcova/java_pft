@@ -1,3 +1,6 @@
+import org.gradle.api.Project
+import org.gradle.api.tasks.testing.Test
+
 apply plugin: 'java'
 
 
@@ -12,4 +15,5 @@ dependencies{
     compile 'org.lucee:httpcomponents-httpclient:4.5.3'
     compile 'org.apache.httpcomponents:fluent-hc:4.5.3'
     compile 'com.jayway.restassured:rest-assured:2.9.0'
+
 }
