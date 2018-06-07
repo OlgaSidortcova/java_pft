@@ -24,13 +24,14 @@ task TestGroups(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-groups.xml'
     }
-    if (Project.hasProperty('browser')) {
+
+    if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
-    if (Project.hasProperty('target')) {
+    if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if (Project.hasProperty('verifyUi')) {
+    if (project.hasProperty('verifyUi')) {
         systemProperty 'verifyUi', "${verifyUi}"
     }
 }
@@ -40,13 +41,13 @@ task TestContacts(type: Test) {
         suites 'src/test/resources/testng-contacts.xml'
     }
 
-    if (Project.hasProperty('browser')) {
+    if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
-    if (Project.hasProperty('target')) {
+    if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if (Project.hasProperty('verifyUi')) {
+    if (project.hasProperty('verifyUi')) {
         systemProperty 'verifyUi', "${verifyUi}"
     }
 }
