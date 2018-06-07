@@ -3,12 +3,5 @@
     "name": "test 0",
     "header": "header 0",
     "footer": "footer 0"
-  },
-  {
-    "name": "test 1",
-    "footer": "footer 1"
-  },
-  {
-    "name": "test 2"
   }
 ]
