@@ -38,6 +38,7 @@ public class ApplicationManager {
       wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("/home/sadsido/Tools/firefox/firefox"));
     } else if (browser.equals(BrowserType.CHROME)) {
       wd = new ChromeDriver();
+      int i =3;///////////////////////////
     }
 
     wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
